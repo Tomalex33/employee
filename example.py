@@ -21,5 +21,3 @@ def test_example(self):
 
 def tearDown(self):
     self.driver.close()
-
-
