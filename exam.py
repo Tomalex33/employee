@@ -1,8 +1,27 @@
 import os
-
+import pytest
 from selenium import webdriver
-driver = webdriver.Chrome()
 from selenium.webdriver import Keys, ActionChains
+
+
+sbis_site = 'https://sbis.ru/'
+
+
+class Start:
+    def __init__(self):
+        self.driver = webdriver
+
+    def browser(self):
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(25)
+        self.driver.get(sbis_site)
+
+
+# @pytest.fixture()#выполняется для каждой функции
+# def clean_cart(browser): #в функцию передаём имя функции-фикстуры, в которой инициализировали браузер (здесь эта фикстура “browser”)
+#     yield #по завершении теста выполняется код, который идет после этой команды
+#     print('yield')
+#     browser.get(sbis_site)
 
 
 
