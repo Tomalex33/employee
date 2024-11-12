@@ -4,7 +4,7 @@ import unittest
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 import pytest
-from conftest import browser
+# from conftest import browser
 # from exam import Start
 
 
@@ -18,8 +18,8 @@ from conftest import browser
 
 class Test():
     @classmethod
-    def setup_class(cls):  # выполнится 1 раз перед всеми тестами в классе
-        browser()
+    def setup_class(cls, driver):  # выполнится 1 раз перед всеми тестами в классе
+        driver()
 
     def setup_method(self):  # Выполняется перед каждым тестом
         pass

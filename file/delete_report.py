@@ -1,12 +1,12 @@
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.by import By
-from file.driver import driver
+import pytest
+from conftest import drivers
 
 
-
+@pytest.fixture(scope="function")
 def delete_report():
-
     pmo_button = driver.find_element(By.CSS_SELECTOR, '[data-qa="toggleOperationsPanel"]')
     pmo_button.click()
     sleep(1)
