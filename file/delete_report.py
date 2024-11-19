@@ -2,7 +2,7 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.by import By
 import pytest
-from conftest import drivers
+# from conftest import drivers
 
 
 @pytest.fixture(scope="function")

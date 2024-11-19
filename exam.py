@@ -44,6 +44,9 @@ class Start:
 # Переход на новую вкладку браузера
 # driver.switch_to.window(driver.window_handles[1])
 
+# Текст url
+# driver.current_url
+
 # Открытие окна браузера на весь экран
 # driver.maximize_window()
 
@@ -80,3 +83,5 @@ class Start:
 #     @classmethod
 #     @teardown_class(cls):  # Выполняется 1 раз после всех тестов в классе
 #         pass
+
+

@@ -12,7 +12,8 @@ link_fix = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
 def test_1(driver):
     page = LoginPage(driver, link_fix)
     page.open()
-    sleep(2)
-    page.should_be_login_page()
+    page.url_text('fix')
+    page.should_be_login_button()
+    page.should_be_login_field()
     sleep(1)
 
