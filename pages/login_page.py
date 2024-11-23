@@ -1,9 +1,17 @@
-from base_page import BasePage
+from pages.base_page import BasePage
 from file.locators import LoginPageLocators
 from selenium.webdriver.common.by import By
+from selenium.webdriver import Keys
+
+login_add = 'пчелкин'
+pass_add = 'пчелкин123'
 
 
 class LoginPage(BasePage):
+
+    def authorization(self):
+        self.finds_element_and_send_keys(*LoginPageLocators.LOGIN_FIELD, login_add, Keys.ENTER)
+        self.finds_element_and_send_keys(*LoginPageLocators.PASSWORD_FIELD, pass_add, Keys.ENTER)
 
     def should_be_login_button(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_BUTTON_ENTER), 'Не нашли кнопку ввода логина'
@@ -18,3 +26,6 @@ class LoginPage(BasePage):
         current_url = self.driver.current_url
         print(current_url)
         assert url_text in current_url, f'В ссылке нет слова {url_text}'
+
+
+

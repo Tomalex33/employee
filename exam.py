@@ -66,7 +66,7 @@ class Start:
 # script_1 = "alert('Robots at work');"
 # driver.execute_script(script_1)
 
-
+################################
 # class Test():
 #     @classmethod
 #     def setup_class(cls):  # выполнится 1 раз перед всеми тестами в классе
@@ -84,4 +84,24 @@ class Start:
 #     @teardown_class(cls):  # Выполняется 1 раз после всех тестов в классе
 #         pass
 
+######################
+# @pytest.mark.login
+# class TestLoginFromProductPage():
+#     @pytest.fixture(scope="function", autouse=True)
+#     def setup(self):
+#         self.product = ProductFactory(title="Best book created by robot")
+#         self.link = self.product.link
+#         yield
+#         # после этого ключевого слова начинается teardown
+#         # выполнится после каждого теста в классе
+#         # удаляем те данные, которые мы создали
+#         self.product.delete()
+#
+#     def test_guest_can_go_to_login_page_from_product_page(self, browser):
+#         page = ProductPage(browser, self.link)
+#         # дальше обычная реализация теста
+###############################
+# class MainPage(BasePage):  # заглушка
+#     def __init__(self, *args, **kwargs):
+#         super(MainPage, self).__init__(*args, **kwargs)
 
