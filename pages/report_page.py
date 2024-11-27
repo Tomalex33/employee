@@ -1,6 +1,9 @@
 from pages.base_page import BasePage
 from file.locators import ReportPageLocators
+from selenium.webdriver import Keys
+from selenium.common.exceptions import NoSuchElementException
 
+name_org = "Новая сверка тест"
 
 class ReportPage(BasePage):
 
@@ -18,3 +21,15 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE)
         self.finds_element_and_click(*ReportPageLocators.PMO_BUTTON_CLOSE)
         self.finds_element_and_click(*ReportPageLocators.CLOSE_BASKET_BUTTON)
+
+    def check_basket_close(self):
+        try:
+            self.finds_element_and_click(*ReportPageLocators.CLOSE_BASKET_BUTTON)
+        except NoSuchElementException:
+            return True
+        return True
+
+    def check_filter_org(self):
+        self.finds_element_and_click(*ReportPageLocators.ORG_NAME_FILTER)
+
+

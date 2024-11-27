@@ -18,6 +18,6 @@ class ReportPageLocators:
     BASKET_BUTTON_DELETE_REPORT = (By.CSS_SELECTOR, "[data-name='FilterViewPanel__additional-editor_deleted']")  # Кнопка перехода в корзину
     PMO_BUTTON_CLOSE = (By.CSS_SELECTOR, "[data-qa='controls-OperationsPanel__close']")  # Закрытие ПМО
     CLOSE_BASKET_BUTTON = (By.CSS_SELECTOR, "[data-qa='FilterViewPanel__baseEditor-cross']")  # Выйти из корзины
-
+    ORG_NAME_FILTER = (By.CSS_SELECTOR, "[name='orgId']")  # Фильтр организаций
 
 

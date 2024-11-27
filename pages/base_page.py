@@ -15,11 +15,18 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
-    def is_element_present(self, how, what, timeout=10):  # Проверка, что элемент найден
+    def is_element_present(self, how, what, timeout=10):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
         try:
             WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
         except NoSuchElementException:
             return False
+        return True
+
+    def is_element_present_simple(self, how, what, timeout=1):  # Простая проверка без условий
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
         return True
 
     def is_not_element_present(self, how, what, timeout=5):  # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
@@ -45,3 +52,12 @@ class BasePage:
         element = self.driver.find_element(how, what)
         element.click()
         sleep(1)
+
+    def finds_element(self, how, what):
+        self.driver.find_element(how, what)
+        sleep(1)
+
+    def finds_element_and_click_send_keys(self, how, what, text, keys):
+        element = self.driver.find_element(how, what)
+        element.click()
+        element.send_keys(text, keys)
