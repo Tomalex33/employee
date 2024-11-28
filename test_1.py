@@ -36,8 +36,18 @@ try:
     sleep(1)
     pas.send_keys(pas_add, Keys.ENTER)
     sleep(10)
-    # driver.get(report_page)
+    driver.get(report_page)
+    sleep(1)
+    # select_filter_org = Select(driver.find_element(By.CSS_SELECTOR, '[name="orgId"]'))
     # sleep(1)
+    filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')
+    filter_org.click()
+    reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')
+    reset_org_in_filter.click()
+    apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')
+    apply_filter_org.click()
+
+
     # DownloadReports(driver).load_file_api_and_open(file_path, opened_in_new_tab=False)  # загрузка всех файлов в папке
     # file_result = FileResultWindow(driver)
     # file_result.check_all_loading_successful(2)

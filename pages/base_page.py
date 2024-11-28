@@ -3,6 +3,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from selenium.webdriver.support.ui import Select
 
 
 class BasePage:
@@ -61,3 +62,6 @@ class BasePage:
         element = self.driver.find_element(how, what)
         element.click()
         element.send_keys(text, keys)
+
+    def finds_element_and_select(self, how, what, text):
+        Select(self.driver.find_element(how, what)).select_by_value(text)

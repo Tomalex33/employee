@@ -2,8 +2,11 @@ from pages.base_page import BasePage
 from file.locators import ReportPageLocators
 from selenium.webdriver import Keys
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import Select
+from time import sleep
 
 name_org = "Новая сверка тест"
+
 
 class ReportPage(BasePage):
 
@@ -30,6 +33,5 @@ class ReportPage(BasePage):
         return True
 
     def check_filter_org(self):
-        self.finds_element_and_click(*ReportPageLocators.ORG_NAME_FILTER)
-
+        self.finds_element_and_select(*ReportPageLocators.ORG_NAME_FILTER, 'text')
 
