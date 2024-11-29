@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 sbis_site = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
 login_add = 'пчелкин'
 pas_add = 'пчелкин123'
+org = 'новая сверка тест'
 current_dir = os.path.abspath(os.path.dirname(__file__))
 file_path = os.path.join(current_dir, 'test-files\\case_2')
 report_page = "https://fix-online.sbis.ru/page/fns"
@@ -38,14 +39,25 @@ try:
     sleep(10)
     driver.get(report_page)
     sleep(1)
-    # select_filter_org = Select(driver.find_element(By.CSS_SELECTOR, '[name="orgId"]'))
-    # sleep(1)
-    filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')
+    filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # клик на иконку фильтра организаций"
     filter_org.click()
-    reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')
+    sleep(1)
+    reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для отмены орг в фильтре
     reset_org_in_filter.click()
-    apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')
+    sleep(1)
+    apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения отмененной организации
     apply_filter_org.click()
+    sleep(1)
+    ur_org = driver.find_element(By.CSS_SELECTOR, '.controls-FilterView__text')  # клик на поле "все юр. лица"
+    ur_org.click()
+    sleep(1)
+    find_org = driver.find_elements(By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
+    find_org[0].send_keys(org)
+    sleep(2)
+    choice_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
+    choice_org.click()
+    sleep(1)
+
 
 
     # DownloadReports(driver).load_file_api_and_open(file_path, opened_in_new_tab=False)  # загрузка всех файлов в папке

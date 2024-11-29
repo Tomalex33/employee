@@ -23,7 +23,7 @@ def test_1(driver):
     report_fns.should_be_report_button()
     report_fns.open()
     sleep(1)
-    # report_fns.check_basket_close()
+    report_fns.check_basket_close()
     report_fns.check_filter_org()
     # DownloadReports(driver).load_file_api_and_open(file_path, opened_in_new_tab=False)  # загрузка всех файлов в папке
     # file_result = FileResultWindow(driver)

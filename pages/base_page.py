@@ -49,13 +49,14 @@ class BasePage:
         element = self.driver.find_element(how, what)
         element.send_keys(text, keys)
 
+    def finds_elements_and_send_keys(self, how, what, text):   # находим несколько элементов и выбираем первый + передаем текст
+        element = self.driver.find_elements(how, what)
+        element[0].send_keys(text)
+        sleep(1)
+
     def finds_element_and_click(self, how, what):
         element = self.driver.find_element(how, what)
         element.click()
-        sleep(1)
-
-    def finds_element(self, how, what):
-        self.driver.find_element(how, what)
         sleep(1)
 
     def finds_element_and_click_send_keys(self, how, what, text, keys):

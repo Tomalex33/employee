@@ -18,20 +18,25 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*ReportPageLocators.CHECK_PMO_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.REMOTE_REPORT_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE)
-        self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON_DELETE_REPORT)
+        self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.CHECK_PMO_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.REMOTE_REPORT_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE)
         self.finds_element_and_click(*ReportPageLocators.PMO_BUTTON_CLOSE)
-        self.finds_element_and_click(*ReportPageLocators.CLOSE_BASKET_BUTTON)
+        self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON_CLOSE)
 
     def check_basket_close(self):
         try:
-            self.finds_element_and_click(*ReportPageLocators.CLOSE_BASKET_BUTTON)
+            self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON_CLOSE)
         except NoSuchElementException:
             return True
         return True
 
     def check_filter_org(self):
-        self.finds_element_and_select(*ReportPageLocators.ORG_NAME_FILTER, 'text')
+        self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
+        self.finds_element_and_click(*ReportPageLocators.RESET_ORG_IN_FILTER)
+        self.finds_element_and_click(*ReportPageLocators.FILTER_ORG_APPLY)
+        self.finds_element_and_click(*ReportPageLocators.ORG_ALL)
+        self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
+        self.finds_element_and_click(*ReportPageLocators.ORG_CHOICE)
 
