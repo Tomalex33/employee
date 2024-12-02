@@ -29,36 +29,74 @@ try:
     driver.get(sbis_site)
     print('ВЫВОДИМ ВСЕ принты')
     print(driver.current_url)
-    print('проверка')
     sleep(2)
     login = driver.find_element(By.CSS_SELECTOR, '.controls-InputBase__nativeField_caretFilled.controls-InputBase__nativeField_caretFilled_theme_default')
     login.send_keys(login_add, Keys.ENTER)
     pas = driver.find_element(By.CSS_SELECTOR, '.controls-Password__nativeField_caretFilled_theme_default')
     sleep(1)
     pas.send_keys(pas_add, Keys.ENTER)
-    sleep(10)
+    sleep(5)
     driver.get(report_page)
     sleep(1)
-    filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # клик на иконку фильтра организаций"
-    filter_org.click()
+    # filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # клик на иконку фильтра организаций"
+    # filter_org.click()
+    # sleep(1)
+    # reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для отмены орг в фильтре
+    # reset_org_in_filter.click()
+    # sleep(1)
+    # apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения отмененной организации
+    # apply_filter_org.click()
+    # sleep(1)
+    # ur_org = driver.find_element(By.CSS_SELECTOR, '.controls-FilterView__text')  # клик на поле "все юр. лица"
+    # ur_org.click()
+    # sleep(1)
+    # find_org = driver.find_elements(By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
+    # find_org[0].send_keys(org)
+    # sleep(2)
+    # choice_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
+    # choice_org.click()
+    # sleep(1)
+    report_rsv = driver.find_elements(By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем РСВ
+    for i in report_rsv:
+        if i.text == "I кв'24":
+            i.click()
+            sleep(8)
+    discrepancies = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-qa="structure-counter"] div span')))
+    assert discrepancies.text == '6', f'Фактическое значение {discrepancies.text} \n Количество расхождений отличается от эталонного значения = 6'
     sleep(1)
-    reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для отмены орг в фильтре
-    reset_org_in_filter.click()
-    sleep(1)
-    apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения отмененной организации
-    apply_filter_org.click()
-    sleep(1)
-    ur_org = driver.find_element(By.CSS_SELECTOR, '.controls-FilterView__text')  # клик на поле "все юр. лица"
-    ur_org.click()
-    sleep(1)
-    find_org = driver.find_elements(By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
-    find_org[0].send_keys(org)
+    subsection_1 = driver.find_element(By.CSS_SELECTOR, '[data-qa="structure-item"][title="Подраздел 1"][data-state="created"]')  # Раздел 1 подраздел 1"
+    subsection_1.click()
     sleep(2)
-    choice_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
-    choice_org.click()
+    run_all_calc = driver.find_element(By.CSS_SELECTOR, '[data-qa="runFedAllCalc"]')  # Запуск всех расчетов
+    run_all_calc.click()
     sleep(1)
-
-
+    confirm_calc = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-ConfirmationDialog__button-true"]')  # Подтверждения запуска всех расчетов
+    confirm_calc.click()
+    sleep(10)
+    close_report = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')))  # Закрываем отчет
+    close_report.click()
+    sleep(1)
+    for i in report_rsv:
+        if i.text == "II кв'24":
+            i.click()
+            sleep(8)
+    discrepancies = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-qa="structure-counter"] div span')))
+    assert discrepancies.text == '4'
+    subsection_1 = driver.find_element(By.CSS_SELECTOR, '[data-qa="structure-item"][title="Подраздел 1"][data-state="created"]')  # Раздел 1 подраздел 1"
+    subsection_1.click()
+    sleep(1)
+    run_all_calc = driver.find_element(By.CSS_SELECTOR, '[data-qa="runFedAllCalc"]')  # Запуск всех расчетов
+    run_all_calc.click()
+    sleep(1)
+    confirm_calc = driver.find_element(By.CSS_SELECTOR,  '[data-qa="controls-ConfirmationDialog__button-true"]')  # Подтверждения запуска всех расчетов
+    confirm_calc.click()
+    sleep(10)
+    discrepancies_not = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[title="Расхождений нет"]')))
+    assert discrepancies_not.text == 'Расхождений нет'
+    sleep(1)
+    close_report = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # Закрываем отчет
+    close_report.click()
+    sleep(1)
 
     # DownloadReports(driver).load_file_api_and_open(file_path, opened_in_new_tab=False)  # загрузка всех файлов в папке
     # file_result = FileResultWindow(driver)

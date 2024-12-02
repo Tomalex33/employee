@@ -105,3 +105,19 @@ class Start:
 #     def __init__(self, *args, **kwargs):
 #         super(MainPage, self).__init__(*args, **kwargs)
 
+###############################
+
+ # task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')
+
+ ##############################
+
+# Функция для поиска элемента по селектору ID
+# def find_element_by_id(driver, id):
+#     try:
+#         return WebDriverWait(driver, 10).until(
+#             EC.presence_of_element_located((By.ID, id))
+#         )
+#     except TimeoutException:
+#         return None
+
+    ######################
