@@ -21,7 +21,6 @@ class ReportPageLocators:
     BASKET_BUTTON = (By.CSS_SELECTOR, "[data-name='FilterViewPanel__additional-editor_deleted']")  # Кнопка перехода в корзину
     BASKET_BUTTON_CLOSE = (By.CSS_SELECTOR, "[data-qa='FilterViewPanel__baseEditor-cross']")  # Выйти из корзины
 
-
     ICON_FILTER_ORG = (By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # иконка фильтра организаций"
     RESET_ORG_IN_FILTER = (By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для сброса организации в фильтре
     FILTER_ORG_APPLY = (By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения сброшенной организации
@@ -29,3 +28,8 @@ class ReportPageLocators:
     ORG_FIND = (By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
     ORG_CHOICE = (By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
 
+    PERIOD_CHOICE = (By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем период у отчетов
+
+
+class RVSLocators:
+    CLOSE_REPORT = (By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # закрытие отчета

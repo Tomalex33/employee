@@ -1,11 +1,6 @@
 from pages.base_page import BasePage
-from file.locators import ReportPageLocators
-from selenium.webdriver import Keys
+from file.locators import ReportPageLocators, RVSLocators
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import Select
-from time import sleep
-
-name_org = "Новая сверка тест"
 
 
 class ReportPage(BasePage):
@@ -32,7 +27,7 @@ class ReportPage(BasePage):
             return True
         return True
 
-    def check_filter_org(self):
+    def check_filter_org(self, name_org):
         self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
         self.finds_element_and_click(*ReportPageLocators.RESET_ORG_IN_FILTER)
         self.finds_element_and_click(*ReportPageLocators.FILTER_ORG_APPLY)
@@ -40,3 +35,8 @@ class ReportPage(BasePage):
         self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
         self.finds_element_and_click(*ReportPageLocators.ORG_CHOICE)
 
+    def choice_report(self, period):
+        self.finds_elements_contain_text(*ReportPageLocators.PERIOD_CHOICE, period)
+
+    def close_report(self):
+        self.finds_element_and_click(*RVSLocators.CLOSE_REPORT)

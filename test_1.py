@@ -38,24 +38,28 @@ try:
     sleep(5)
     driver.get(report_page)
     sleep(1)
-    # filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # клик на иконку фильтра организаций"
-    # filter_org.click()
-    # sleep(1)
-    # reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для отмены орг в фильтре
-    # reset_org_in_filter.click()
-    # sleep(1)
-    # apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения отмененной организации
-    # apply_filter_org.click()
-    # sleep(1)
-    # ur_org = driver.find_element(By.CSS_SELECTOR, '.controls-FilterView__text')  # клик на поле "все юр. лица"
-    # ur_org.click()
-    # sleep(1)
-    # find_org = driver.find_elements(By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
-    # find_org[0].send_keys(org)
-    # sleep(2)
-    # choice_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
-    # choice_org.click()
-    # sleep(1)
+    filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterView__icon"]')  # клик на иконку фильтра организаций"
+    filter_org.click()
+    sleep(1)
+    reset_org_in_filter = driver.find_element(By.CSS_SELECTOR, '[data-qa="FilterViewPanel__baseEditor-cross"]')  # крестик для отмены орг в фильтре
+    reset_org_in_filter.click()
+    sleep(1)
+    apply_filter_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="controls-FilterPanelPopup__applyButton"]')  # иконка применения отмененной организации
+    apply_filter_org.click()
+    sleep(1)
+    ur_org = driver.find_element(By.CSS_SELECTOR, '.controls-FilterView__text')  # клик на поле "все юр. лица"
+    ur_org.click()
+    sleep(1)
+    find_org = driver.find_elements(By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
+    find_org[0].send_keys(org)
+    sleep(2)
+    choice_org = driver.find_element(By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
+    choice_org.click()
+    sleep(1)
+    # DownloadReports(driver).load_file_api_and_open(file_path, opened_in_new_tab=False)  # загрузка всех файлов в папке
+    # file_result = FileResultWindow(driver)
+    # file_result.check_all_loading_successful(2)
+    # file_result.close()
     report_rsv = driver.find_elements(By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем РСВ
     for i in report_rsv:
         if i.text == "I кв'24":

@@ -54,6 +54,12 @@ class BasePage:
         element[0].send_keys(text)
         sleep(1)
 
+    def finds_elements_contain_text(self, how, what, period):   # находим несколько элементов и выбираем по тексту
+        periods = self.driver.find_elements(how, what)
+        for i in periods:
+            if i.text == period:
+                i.click()
+
     def finds_element_and_click(self, how, what):
         element = self.driver.find_element(how, what)
         element.click()
