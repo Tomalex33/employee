@@ -35,7 +35,7 @@ class ReportPage(BasePage):
         self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
         self.finds_element_and_click(*ReportPageLocators.ORG_CHOICE)
 
-    def choice_report(self, period):
+    def select_report_by_period(self, period):
         self.finds_elements_contain_text(*ReportPageLocators.PERIOD_CHOICE, period)
 
     def close_report(self):

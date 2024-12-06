@@ -30,7 +30,7 @@ def test_1(driver):
     # file_result = FileResultWindow(driver)
     # file_result.check_all_loading_successful(2)
     # file_result.close()
-    report_fns.choice_report(period_1)
+    report_fns.select_report_by_period(period_1)
     sleep(3)
     report_fns.close_report()
     sleep(3)
