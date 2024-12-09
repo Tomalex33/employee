@@ -30,6 +30,15 @@ class ReportPageLocators:
 
     PERIOD_CHOICE = (By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем период у отчетов
 
+    CLOSE_REPORT = (By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # закрытие отчетов (РСВ, ПерсСвед, ЕФС-1)
+    SAVE_REPORT = (By.CSS_SELECTOR, '[title="Сохранить"]')  # сохранить отчет
+
+    DISC = (By.CSS_SELECTOR, '[data-qa="structure-counter"] div span')  # количество расхождений в отчетах
+    DISC_NOT = (By.CSS_SELECTOR, '[title="Расхождений нет"]')  # нет расхождений в отчете
+
 
 class RVSLocators:
-    CLOSE_REPORT = (By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # закрытие отчета
+
+    SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="structure-item"][title="Подраздел 1"][data-state="created"]')  # Раздел 1 подраздел 1"
+    RUN_ALL_CALC_RSV_IN_SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="runFedAllCalc"]')  # Запуск всех расчетов
+    CONFIRM_CALC = (By.CSS_SELECTOR, '[data-qa="controls-ConfirmationDialog__button-true"]')  # Подтверждения запуска всех расчетов

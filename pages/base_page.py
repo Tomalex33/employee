@@ -15,10 +15,11 @@ class BasePage:
 
     def open(self):
         self.driver.get(self.url)
+        sleep(2)
 
-    def is_element_present(self, how, what, timeout=10):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
+    def is_element_present(self, how, what, timeout=30):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
         try:
-            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((how, what)))
         except NoSuchElementException:
             return False
         return True

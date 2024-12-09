@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from file.locators import LoginPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
+from time import sleep
 
 login_add = 'пчелкин'
 pass_add = 'пчелкин123'
@@ -15,6 +16,7 @@ class LoginPage(BasePage):
 
     def should_be_login_button(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_BUTTON_ENTER), 'Не нашли кнопку ввода логина'
+        sleep(1)
 
     def should_be_login_field(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_FIELD), 'Не нашли поле ввода логина'
