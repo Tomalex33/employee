@@ -120,4 +120,11 @@ class Start:
 #     except TimeoutException:
 #         return None
 
-    ######################
+######################
+
+    # Xpath
+    # input[value = "150 000.00"]
+# [data - qa = "cell"].controls - DecoratorMoney.controls - text - danger
+######################
+
+

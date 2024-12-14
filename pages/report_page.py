@@ -29,7 +29,6 @@ class ReportPage(BasePage):
             return True
         return True
 
-
     def check_filter_org(self, name_org):
         self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
         self.finds_element_and_click(*ReportPageLocators.RESET_ORG_IN_FILTER)
@@ -56,8 +55,18 @@ class ReportPage(BasePage):
         assert disc_not.text == 'Расхождений нет', 'Не должно быть расхождений, ошибка'
         sleep(1)
 
-    def run_all_calc_in_subsection_1_rsv(self):
+    def run_all_calc_in_subsection_1_rsv(self, text_value):
         self.finds_element_and_click(*RVSLocators.SUBSECTION_1)
         self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_SUBSECTION_1)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CALC)
-        self.is_element_present(*ReportPageLocators.SAVE_REPORT)
+        self.is_element_present_value(*RVSLocators.STRING_51, text_value)
+        sleep(2)
+
+    def run_all_calc_in_employee_card(self):
+        self.finds_element_and_click(*ReportPageLocators.DISC)
+        self.finds_element_and_click(*RVSLocators.SYM_DISC_TEST3)
+        self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CALC)
+        sleep(6)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+

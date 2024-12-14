@@ -24,6 +24,13 @@ class BasePage:
             return False
         return True
 
+    def is_element_present_value(self, how, what, text_value, timeout=30):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_value((how, what), text_value))
+        except NoSuchElementException:
+            return False
+        return True
+
     def is_element_present_simple(self, how, what, timeout=1):  # Простая проверка без условий
         try:
             WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
