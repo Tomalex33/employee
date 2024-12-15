@@ -45,6 +45,13 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*ReportPageLocators.CLOSE_REPORT)
         sleep(2)
 
+    def created_report(self, text):
+        self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
+        self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
+        self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT)
+        # self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+        self.finds_element_and_select(*ReportPageLocators.POP_UP, text)
+
     def check_discrepancies(self, disc_number):
         disc = self.driver.find_element(*ReportPageLocators.DISC)
         assert disc.text == disc_number, f'Фактическое значение {disc.text} \n Количество расхождений отличается от эталонного значения = {disc_number}'
@@ -62,11 +69,11 @@ class ReportPage(BasePage):
         self.is_element_present_value(*RVSLocators.STRING_51, text_value)
         sleep(2)
 
-    def run_all_calc_in_employee_card(self):
+    def run_all_calc_in_employee_card(self, text_value):
         self.finds_element_and_click(*ReportPageLocators.DISC)
         self.finds_element_and_click(*RVSLocators.SYM_DISC_TEST3)
         self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CALC)
-        sleep(6)
+        self.is_element_present_value(*RVSLocators.STRING_210_1_MONTH, text_value)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
 

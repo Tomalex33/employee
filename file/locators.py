@@ -28,7 +28,13 @@ class ReportPageLocators:
     ORG_FIND = (By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
     ORG_CHOICE = (By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
 
-    PERIOD_CHOICE = (By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем период у отчетов
+    PERIOD_CHOICE = (By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем период у отчетов, в реестре
+
+    CREATED_REPORT = (By.CSS_SELECTOR, '[data-qa="sabyPage-addButton"]')  # создать отчет
+    ALL_LIST_REPORT = (By.CSS_SELECTOR, '.eoregistry-appCreateButton__moreButton')  # весь список отчетов
+    PERIOD_REPORT = (By.CSS_SELECTOR, '[data-qa="DateLinkView__template"]')  # выбираем период отчета при создание и всего списка отчетов
+    PERIOD_REPORT_4_2022 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2022-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
+    POP_UP = (By.CSS_SELECTOR, '.controls-Popup.controls-DateRangeSelectorLite__picker-normal')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
 
     CLOSE_REPORT = (By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # закрытие отчетов (РСВ, ПерсСвед, ЕФС-1)
     SAVE_REPORT = (By.CSS_SELECTOR, '[title="Сохранить"]')  # сохранить отчет
@@ -46,3 +52,4 @@ class RVSLocators:
     SYM_DISC_TEST3 = (By.XPATH, '//*[contains(text(), "10 530")]')  # поиск элемента по тексту, находим сумму расхождений для test_case_sym3
     RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-qa="runAllCalculations"]')  # Запуск всех расчетов из карточки сотрудника
     CONFIRM_CHANGE_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-name="form_button_actionYes"]')  # Подтверждения изменений в карточке сотрудника
+    STRING_210_1_MONTH = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.ВыплСВДоп.ВыплСВДопМТ.НачислСВ"] div div[data-qa="controls-Render__field"] .controls-Field')  # Сумма в строке первого месяца

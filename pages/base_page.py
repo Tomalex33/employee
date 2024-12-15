@@ -79,4 +79,5 @@ class BasePage:
         element.send_keys(text, keys)
 
     def finds_element_and_select(self, how, what, text):
-        Select(self.driver.find_element(how, what)).select_by_value(text)
+        select = Select(self.driver.find_element(how, what))
+        select.select_by_value(text)

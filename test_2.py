@@ -16,8 +16,24 @@ file_path3 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test-file
 disc_number_test_2_1 = '6'
 disc_number_test_2_2 = '4'
 disc_number_test_3_1 = '23'
-text_value_1 = '75 000.00'
-text_value_2 = '150 000.00'
+text_value_2_1 = '75 000.00'
+text_value_2_2 = '150 000.00'
+text_value_3_1 = '10 530.05'
+text_pop = 'Декабрь, IV кв., год'
+
+
+def test_case_sym1(driver):
+    page = LoginPage(driver, link_fix)
+    page.open()
+    page.should_be_login_button()
+    page.authorization()
+    report_fns = ReportPage(driver, link_report_fns)
+    report_fns.should_be_report_button()
+    report_fns.open()
+    # report_fns.check_filter_org(name_org)
+    # report_fns.check_basket_close()
+    report_fns.created_report(text_pop)
+    sleep(1)
 
 
 def test_case_sym2(driver):
@@ -34,15 +50,13 @@ def test_case_sym2(driver):
     file_result = FileResultWindow(driver)
     file_result.check_all_loading_successful(2)
     file_result.close()
-    print(f'Выбираем РСВ за {period_1}')
     report_fns.select_report_by_period(period_1)
     report_fns.check_discrepancies(disc_number_test_2_1)  # проверяем количество расхождений
-    report_fns.run_all_calc_in_subsection_1_rsv(text_value_1)
+    report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_1)
     report_fns.close_report()
-    print(f'Выбираем РСВ за {period_2}')
     report_fns.select_report_by_period(period_2)
     report_fns.check_discrepancies(disc_number_test_2_2)
-    report_fns.run_all_calc_in_subsection_1_rsv(text_value_2)
+    report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_2)
     report_fns.check_not_discrepancies()
     report_fns.close_report()
     report_fns.delete_all_report()
@@ -57,15 +71,15 @@ def test_case_sym3(driver):
     report_fns = ReportPage(driver, link_report_fns)
     report_fns.should_be_report_button()
     report_fns.open()
-    # report_fns.check_filter_org(name_org)
-    # report_fns.check_basket_close()
+    report_fns.check_filter_org(name_org)
+    report_fns.check_basket_close()
     DownloadReports(driver).load_file_api_and_open(file_path3, opened_in_new_tab=False)  # загрузка всех файлов в папке
     file_result = FileResultWindow(driver)
     file_result.check_all_loading_successful(3)
     file_result.close()
     report_fns.select_report_by_period(period_3)
     report_fns.check_discrepancies(disc_number_test_3_1)
-    report_fns.run_all_calc_in_employee_card()
+    report_fns.run_all_calc_in_employee_card(text_value_3_1)
     report_fns.check_not_discrepancies()
     report_fns.close_report()
     report_fns.delete_all_report()
