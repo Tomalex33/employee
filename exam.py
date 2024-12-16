@@ -128,3 +128,39 @@ class Start:
 ######################
 
 
+        with report.step('Создать отчет'):
+            self.desktop.move_to_section_href(RegistersName.fns, self.org)
+            self.desktop.check_load_registry()
+            self.desktop.create_report_with_main_from_all_list(self.report_name, '2022', 'IV кв')
+            self.rsv.check_open_panel_report()
+            delay(2, 'Стабильность')
+            self.rsv.save_and_check_report_with_main_page()
+
+        def create_report_with_main_from_all_list(self, report_name, year, period, check_close=True,
+                                                  exact=True, **report_data):
+            """Метод для создания отчета с главной страницей через панель всех отчетов
+            :param report_name: название отчета
+            :param year: год
+            :param period: период
+            :param check_close: проверить закрытие панели
+            :param exact
+            :param report_data Данные для миникарточки
+            """
+
+            log(f"Создать отчет '{report_name}'")
+            self.enable_eo_logger()
+            all_reports = self.open_create_panel()
+            all_reports.create_main_report(report_name, year, period, False, exact=exact)
+            if not check_close:  # Если отчет не на главной, то смотрим миникарточку
+                Dialog(self.driver).fill_data_new_report(**report_data)
+
+            def open_create_panel(self):
+                """Открыть панель создания отчетов"""
+
+                from pages_inside.libraries.EORegistry.createPanel import Panel
+                from pages_inside.translate import translate
+
+                self.create_dwbtn.select(translate("Весь список"))
+                all_reports = Panel(self.driver)
+                all_reports.check_open()
+                return all_reports
