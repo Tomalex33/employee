@@ -6,9 +6,9 @@ from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 
 name_org = "Новая сверка тест"
-period_1 = "I кв'24"
-period_2 = "II кв'24"
-period_3 = "III кв'24"
+period_1_24 = "I кв'24"
+period_2_24 = "II кв'24"
+period_3_24 = "III кв'24"
 link_fix = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
 link_report_fns = 'https://fix-online.sbis.ru/page/fns'
 file_path2 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test-files\\case_2')
@@ -19,7 +19,8 @@ disc_number_test_3_1 = '23'
 text_value_2_1 = '75 000.00'
 text_value_2_2 = '150 000.00'
 text_value_3_1 = '10 530.05'
-text_pop = 'Декабрь, IV кв., год'
+years_text = '2022'
+report_rsv = 'Расчет по страховым взносам'
 
 
 def test_case_sym1(driver):
@@ -32,7 +33,7 @@ def test_case_sym1(driver):
     report_fns.open()
     # report_fns.check_filter_org(name_org)
     # report_fns.check_basket_close()
-    report_fns.created_report(text_pop)
+    report_fns.created_report(years_text, report_rsv)
     sleep(1)
 
 
@@ -50,11 +51,11 @@ def test_case_sym2(driver):
     file_result = FileResultWindow(driver)
     file_result.check_all_loading_successful(2)
     file_result.close()
-    report_fns.select_report_by_period(period_1)
+    report_fns.select_report_by_period(period_1_24)
     report_fns.check_discrepancies(disc_number_test_2_1)  # проверяем количество расхождений
     report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_1)
     report_fns.close_report()
-    report_fns.select_report_by_period(period_2)
+    report_fns.select_report_by_period(period_2_24)
     report_fns.check_discrepancies(disc_number_test_2_2)
     report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_2)
     report_fns.check_not_discrepancies()
@@ -77,7 +78,7 @@ def test_case_sym3(driver):
     file_result = FileResultWindow(driver)
     file_result.check_all_loading_successful(3)
     file_result.close()
-    report_fns.select_report_by_period(period_3)
+    report_fns.select_report_by_period(period_3_24)
     report_fns.check_discrepancies(disc_number_test_3_1)
     report_fns.run_all_calc_in_employee_card(text_value_3_1)
     report_fns.check_not_discrepancies()

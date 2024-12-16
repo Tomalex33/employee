@@ -45,12 +45,38 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*ReportPageLocators.CLOSE_REPORT)
         sleep(2)
 
-    def created_report(self, text):
+    def created_report(self, years_text, report):
         self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
+        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
+        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT)
-        # self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
-        self.finds_element_and_select(*ReportPageLocators.POP_UP, text)
+        sleep(1)
+        current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
+        sleep(1)
+        if current_years.text == years_text:
+            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+            sleep(1)
+        elif current_years.text > years_text:
+            self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
+            sleep(1)
+            if current_years.text != years_text:
+                self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
+                sleep(1)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                sleep(1)
+            else:
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+        elif current_years.text < years_text:
+            self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
+            sleep(1)
+            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+            sleep(1)
+        self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
+        sleep(1)
+        self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
+        sleep(1)
+        self.is_element_present(*RVSLocators.MAIN)
 
     def check_discrepancies(self, disc_number):
         disc = self.driver.find_element(*ReportPageLocators.DISC)

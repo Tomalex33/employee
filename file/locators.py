@@ -34,7 +34,11 @@ class ReportPageLocators:
     ALL_LIST_REPORT = (By.CSS_SELECTOR, '.eoregistry-appCreateButton__moreButton')  # весь список отчетов
     PERIOD_REPORT = (By.CSS_SELECTOR, '[data-qa="DateLinkView__template"]')  # выбираем период отчета при создание и всего списка отчетов
     PERIOD_REPORT_4_2022 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2022-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
-    POP_UP = (By.CSS_SELECTOR, '.controls-Popup.controls-DateRangeSelectorLite__picker-normal')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
+    LEFT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowUp"]')  # листаем год влево, на уменьшение
+    RIGHT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowDown"]')  # листаем год вправо, на увеличение
+    CURRENT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__year"]')  # текущий год в выпадающем списке дат
+    REPORT_FIND = (By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input')  # поле для ввода названия отчета в списке всех отчетов
+    CHOICE_FIND_REPORT = (By.CSS_SELECTOR, '[.controls-Highlight_highlight')  # выбор найденного отчета
 
     CLOSE_REPORT = (By.CSS_SELECTOR, '[data-qa="controls-stack-Button__close"]')  # закрытие отчетов (РСВ, ПерсСвед, ЕФС-1)
     SAVE_REPORT = (By.CSS_SELECTOR, '[title="Сохранить"]')  # сохранить отчет
@@ -45,6 +49,7 @@ class ReportPageLocators:
 
 class RVSLocators:
 
+    MAIN = (By.CSS_SELECTOR, '[title="Главная"]')  # Главная"
     SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="structure-item"][title="Подраздел 1"][data-state="created"]')  # Раздел 1 подраздел 1"
     RUN_ALL_CALC_RSV_IN_SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="runFedAllCalc"]')  # Запуск всех расчетов
     CONFIRM_CALC = (By.CSS_SELECTOR, '[data-qa="controls-ConfirmationDialog__button-true"]')  # Подтверждения запуска всех расчетов
