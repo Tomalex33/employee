@@ -11,6 +11,8 @@ period_2_24 = "II кв'24"
 period_3_24 = "III кв'24"
 link_fix = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
 link_report_fns = 'https://fix-online.sbis.ru/page/fns'
+link_test = 'https://test-sso.sbis.ru/auth-online/?ret=test-online.sbis.ru'
+link_report_test_fns = 'https://test-online.sbis.ru/page/fns'
 file_path2 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test-files\\case_2')
 file_path3 = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test-files\\case_3')
 disc_number_test_2_1 = '6'
@@ -21,6 +23,8 @@ text_value_2_2 = '150 000.00'
 text_value_3_1 = '10 530.05'
 years_text = '2022'
 report_rsv = 'Расчет по страховым взносам'
+fio = "Иванов Константин Олегович"
+sym_140 = '1000'
 
 
 def test_case_sym1(driver):
@@ -34,6 +38,9 @@ def test_case_sym1(driver):
     # report_fns.check_filter_org(name_org)
     # report_fns.check_basket_close()
     report_fns.created_report(years_text, report_rsv)
+    report_fns.type_payer_choice()
+    report_fns.check_not_discrepancies()
+    report_fns.adding_employees_section_3(fio, sym_140)
     sleep(1)
 
 

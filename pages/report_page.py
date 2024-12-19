@@ -41,10 +41,6 @@ class ReportPage(BasePage):
         self.finds_elements_contain_text(*ReportPageLocators.PERIOD_CHOICE, period)
         self.is_element_present(*ReportPageLocators.SAVE_REPORT)
 
-    def close_report(self):
-        self.finds_element_and_click(*ReportPageLocators.CLOSE_REPORT)
-        sleep(2)
-
     def created_report(self, years_text, report):
         self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
         sleep(1)
@@ -76,7 +72,11 @@ class ReportPage(BasePage):
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
         sleep(1)
-        self.is_element_present(*RVSLocators.MAIN)
+        self.is_element_clickable(*RVSLocators.MAIN)
+
+    def close_report(self):
+        self.finds_element_and_click(*ReportPageLocators.CLOSE_REPORT)
+        sleep(2)
 
     def check_discrepancies(self, disc_number):
         disc = self.driver.find_element(*ReportPageLocators.DISC)
@@ -103,3 +103,39 @@ class ReportPage(BasePage):
         self.is_element_present_value(*RVSLocators.STRING_210_1_MONTH, text_value)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
 
+    def type_payer_choice(self):
+        sleep(1)
+        print('проверка что Раздел 1 присутствует')
+        self.is_element_present(*RVSLocators.SECTION_1)
+        print('поиск Раздела 1 и клик по нему')
+        self.finds_element_and_click(*RVSLocators.SECTION_1)
+        print('ждем появления надписи "Отчет создан"')
+        self.is_element_present_experement(*ReportPageLocators.REPORT_CREATED)
+        sleep(2)
+        print('Выбор типа плательщика"')
+        self.finds_element_and_click(*RVSLocators.TYPE_PAYER)
+        print('Выбираем тип плательщика - 1"')
+        self.finds_element_and_click(*RVSLocators.TYPE_PAYER_1)
+        print('проверка что выбран тип плательщика - 1"')
+        check_text = self.driver.find_element(*RVSLocators.CHECK_TEXT_TYPE_PAYER_1)
+        assert check_text.text == '1 - Выплаты физ. лицам осуществлялись', 'Текст не соответсвует эталонному "1 - Выплаты физ. лицам осуществлялись"'
+
+    def adding_employees_section_3(self, fio, sym_140):
+        self.finds_element_and_click(*RVSLocators.SECTION_3)
+        self.finds_element_and_click(*RVSLocators.ADD_EMPLOYEES_SECTION_3)
+        self.is_element_present(*RVSLocators.BUTTON_ADD_EMPLOYEES_IN_CARD)
+        self.finds_element_and_send_keys_text(*RVSLocators.FIND_EMPLOYEE, fio)
+        self.finds_element_and_click(*RVSLocators.CHOICE_FIND_EMPLOYEE)
+        self.is_element_present(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
+        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_FEB)
+        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
+        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_MAR)
+        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+        self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)

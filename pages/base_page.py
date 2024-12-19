@@ -24,6 +24,13 @@ class BasePage:
             return False
         return True
 
+    def is_element_present_experement(self, how, what, timeout=30, text='Отчет создан'):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element((how, what), text))
+        except NoSuchElementException:
+            return False
+        return True
+
     def is_element_present_value(self, how, what, text_value, timeout=30):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
         try:
             WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_value((how, what), text_value))
@@ -53,13 +60,18 @@ class BasePage:
             return False
         return True
 
-    def finds_element_and_send_keys(self, how, what, text, keys):
+    def finds_element_and_send_keys(self, how, what, text, keys):    # находим элемент пишем text, нажимаем кнопку
         element = self.driver.find_element(how, what)
         element.send_keys(text, keys)
 
     def finds_elements_and_send_keys(self, how, what, text):   # находим несколько элементов и выбираем первый + передаем текст
         element = self.driver.find_elements(how, what)
         element[0].send_keys(text)
+        sleep(1)
+
+    def finds_element_and_send_keys_text(self, how, what, text):   # находим элемент и передаем текст
+        element = self.driver.find_element(how, what)
+        element.send_keys(text)
         sleep(1)
 
     def finds_elements_contain_text(self, how, what, period):   # находим несколько элементов и выбираем по тексту
@@ -73,6 +85,11 @@ class BasePage:
         element.click()
         sleep(1)
 
+    def finds_elements_and_click(self, how, what):                      # находим первый элемент и кликаем по нему
+        element = self.driver.find_elements(how, what)
+        element[0].click()
+        sleep(1)
+
     def finds_element_and_click_send_keys(self, how, what, text, keys):
         element = self.driver.find_element(how, what)
         element.click()
@@ -81,3 +98,10 @@ class BasePage:
     def finds_element_and_select(self, how, what, text):
         select = Select(self.driver.find_element(how, what))
         select.select_by_value(text)
+
+    def is_element_clickable(self, how, what, timeout=30):  # Ожидание проверки элемента видно и включено, так что вы можете нажать на него. элемент является либо локатором (текстом), либо WebElement
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((how, what)))
+        except NoSuchElementException:
+            return False
+        return True

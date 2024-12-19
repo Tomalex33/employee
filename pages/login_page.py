@@ -7,6 +7,9 @@ from time import sleep
 login_add = 'пчелкин'
 pass_add = 'пчелкин123'
 
+login_add_future = 'Январев'
+pass_add_future = 'Январев123'
+
 
 class LoginPage(BasePage):
 

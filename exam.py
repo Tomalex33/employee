@@ -164,3 +164,18 @@ class Start:
                 all_reports = Panel(self.driver)
                 all_reports.check_open()
                 return all_reports
+
+        ##############################
+
+        #     element = None, visibility = True
+        #
+        #     def _element_if_visible(element: WebElement, visibility: bool = True) -> Union[Literal[False], WebElement]:
+        #
+        # > return element if element.is_displayed() == visibility else False
+        # E
+        # AttributeError: 'NoneType'
+        # object
+        # has
+        # no
+        # attribute
+        # 'is_displayed'
