@@ -6,6 +6,7 @@ from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 
 name_org = "Новая сверка тест"
+period_4_22 = "2022"
 period_1_24 = "I кв'24"
 period_2_24 = "II кв'24"
 period_3_24 = "III кв'24"
@@ -37,9 +38,11 @@ def test_case_sym1(driver):
     report_fns.open()
     # report_fns.check_filter_org(name_org)
     # report_fns.check_basket_close()
-    report_fns.created_report(years_text, report_rsv)
-    report_fns.type_payer_choice()
-    report_fns.check_not_discrepancies()
+    # report_fns.created_report(years_text, report_rsv)
+    # report_fns.type_payer_choice()
+    # report_fns.check_not_discrepancies()
+    report_fns.select_report_by_period(period_4_22)    # после отладки удалить
+    sleep(2)                                           # после отладки удалить
     report_fns.adding_employees_section_3(fio, sym_140)
     sleep(1)
 

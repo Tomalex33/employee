@@ -84,6 +84,7 @@ class ReportPage(BasePage):
         sleep(1)
 
     def check_not_discrepancies(self):
+        sleep(1)
         disc_not = self.driver.find_element(*ReportPageLocators.DISC_NOT)
         assert disc_not.text == 'Расхождений нет', 'Не должно быть расхождений, ошибка'
         sleep(1)
@@ -121,8 +122,13 @@ class ReportPage(BasePage):
         assert check_text.text == '1 - Выплаты физ. лицам осуществлялись', 'Текст не соответсвует эталонному "1 - Выплаты физ. лицам осуществлялись"'
 
     def adding_employees_section_3(self, fio, sym_140):
+        print('Проверяем что раздел 3 загружен')
+        self.is_element_present(*RVSLocators.SECTION_3)
+        print('Кликаем на раздел 3')
         self.finds_element_and_click(*RVSLocators.SECTION_3)
+        print('Кликаем на добавления сотрудника')
         self.finds_element_and_click(*RVSLocators.ADD_EMPLOYEES_SECTION_3)
+        print('Проверяем что кнопка добавления сотрудников в карточке сотрудников присутствует')
         self.is_element_present(*RVSLocators.BUTTON_ADD_EMPLOYEES_IN_CARD)
         self.finds_element_and_send_keys_text(*RVSLocators.FIND_EMPLOYEE, fio)
         self.finds_element_and_click(*RVSLocators.CHOICE_FIND_EMPLOYEE)
