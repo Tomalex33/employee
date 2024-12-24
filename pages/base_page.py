@@ -24,14 +24,14 @@ class BasePage:
             return False
         return True
 
-    def is_element_present_experement(self, how, what, timeout=30, text='Отчет создан'):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
+    def is_element_present_text(self, how, what, timeout=30, text='Отчет создан'):  # Проверка, что элемент найден имеет значение text
         try:
             WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element((how, what), text))
         except NoSuchElementException:
             return False
         return True
 
-    def is_element_present_value(self, how, what, text_value, timeout=30):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
+    def is_element_present_value(self, how, what, text_value, timeout=30):  # Проверка, что элемент найден, ждет пока значение value будет text_value
         try:
             WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_value((how, what), text_value))
         except NoSuchElementException:
@@ -66,11 +66,20 @@ class BasePage:
 
     def finds_elements_and_send_keys(self, how, what, text):   # находим несколько элементов и выбираем первый + передаем текст
         element = self.driver.find_elements(how, what)
+        sleep(1)
         element[0].send_keys(text)
         sleep(1)
 
     def finds_element_and_send_keys_text(self, how, what, text):   # находим элемент и передаем текст
         element = self.driver.find_element(how, what)
+        sleep(1)
+        element.send_keys(text)
+        sleep(1)
+
+    def finds_element_click_send_keys_text(self, how, what, text):   # находим элемент, кликаем по нему и передаем текст
+        element = self.driver.find_element(how, what)
+        sleep(1)
+        element.click()
         element.send_keys(text)
         sleep(1)
 

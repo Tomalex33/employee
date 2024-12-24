@@ -179,3 +179,18 @@ class Start:
         # no
         # attribute
         # 'is_displayed'
+
+########################################
+
+        # element_sym = self.driver.find_element(*RVSLocators.STRING_140)
+        # att_value = element_sym.get_attribute("value")
+        # # print(att_value)
+        # # att_value = sym_140
+        # print(att_value)
+        # self.driver.execute_script("arguments[0].setAttribute('value', '11.00')", element_sym)
+        # print(att_value)
+
+
+
+
+

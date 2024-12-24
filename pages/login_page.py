@@ -1,6 +1,5 @@
 from pages.base_page import BasePage
 from file.locators import LoginPageLocators
-from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
 from time import sleep
 

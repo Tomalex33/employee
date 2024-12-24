@@ -65,16 +65,19 @@ class RVSLocators:
     STRING_51 = (By.CSS_SELECTOR, '[data-name="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.БазНеПревышОПС.СумВсегоПер"] div div div[data-qa="controls-Render__field"] input')  # строка 51 , всего
     SYM_DISC_TEST3 = (By.XPATH, '//*[contains(text(), "10 530")]')  # поиск элемента по тексту, находим сумму расхождений для test_case_sym3
     RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-qa="runAllCalculations"]')  # Запуск всех расчетов из карточки сотрудника
-    SECTION_3 = (By.CSS_SELECTOR, '[item-key="Сотрудники"]')  # Раздел 3
-    ADD_EMPLOYEES_SECTION_3 = (By.CSS_SELECTOR, '[data-qa="eo-employees__addButton"]')  # Кнопка добавления сотрудников в Разделе 3
+    SECTION_3 = (By.CSS_SELECTOR, '[item-key="Сотрудники"] div')  # Раздел 3
+    ADD_EMPLOYEES_SECTION_3 = (By.XPATH, '//*[contains(text(), "Добавьте")]')  # Кнопка добавления сотрудников в Разделе 3, когда список сотрудников пуст.
     BUTTON_ADD_EMPLOYEES_IN_CARD = (By.CSS_SELECTOR, '[data-qa="staff-Buttons__add"]')  # Кнопка добавления сотрудников в карточке сотрудника
     FIND_EMPLOYEE = (By.CSS_SELECTOR, '.controls-Field-focused-item.controls-Search__nativeField_caretEmpty') # Поле поиска сотрудника
     CHOICE_FIND_EMPLOYEE = (By.CSS_SELECTOR, '.person-BaseInfo__highlightContainer_Stub')  # Выбор найденного сотрудника
     CONFIRM_CHANGE_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-name="form_button_actionYes"]')  # Подтверждения изменений в карточке сотрудника
+    CONFIRM_CHANGE_STRING_MONTH = (By.CSS_SELECTOR, '[data-qa="controls-itemActions__action controls-default-editing-apply-action"]')  # Подтверждения изменений в строке месяца после изменения
     ADD_MONTH_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-name="form_Employee_AddButtonSum"]')  # Добавление месяцев по основному тарифу
     ADD_MONTH_EMPLOYEE_CARD_DOP = (By.CSS_SELECTOR, '[data-name="form_Employee_AddButtonOtherSum"]')  # Добавление месяцев по доп тарифу
     CHOICE_MONTH_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.Месяц"]')  # Выбор месяца в карточке сотрудника
-    CHOICE_MONTH_EMPLOYEE_CARD_FEB = (By.CSS_SELECTOR, '[title="Февраль"]')  # Выбор февраля в карточке сотрудника
-    CHOICE_MONTH_EMPLOYEE_CARD_MAR = (By.CSS_SELECTOR, '[title="Март"]')  # Выбор марта в карточке сотрудника
+    CHOICE_MONTH_EMPLOYEE_CARD_NOV = (By.CSS_SELECTOR, '[title="Ноябрь"]')  # Выбор февраля в карточке сотрудника
+    CHOICE_MONTH_EMPLOYEE_CARD_DEC = (By.CSS_SELECTOR, '[title="Декабрь"]')  # Выбор марта в карточке сотрудника
     STRING_140 = (By.CSS_SELECTOR, '[data-name="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.СумВыпл"] div div input')  # строка 140
+    STRING_140_EXP = (By.CSS_SELECTOR, '[title="0"] .controls-fontsize-m.controls_text-style_default.controls-text-default.controls-fontweight-default')  # все нули в месяцах карточки сотрудника
+    STRING_140_EXP1 = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.СумВыпл"] [type="text"].controls-Field.js-controls-Field.controls-Field-focused-item.controls-InputBase__nativeField.controls-InputBase__nativeField_caretFilled.controls-InputBase__nativeField_caretFilled_theme_default.controls-InputBase__nativeField_hideCustomPlaceholder')  # строка 140
     STRING_210_1_MONTH = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.ВыплСВДоп.ВыплСВДопМТ.НачислСВ"] div div[data-qa="controls-Render__field"] .controls-Field')  # Сумма в строке первого месяца

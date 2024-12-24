@@ -81,12 +81,14 @@ class ReportPage(BasePage):
     def check_discrepancies(self, disc_number):
         disc = self.driver.find_element(*ReportPageLocators.DISC)
         assert disc.text == disc_number, f'Фактическое значение {disc.text} \n Количество расхождений отличается от эталонного значения = {disc_number}'
+        print(f"Количество расхождений соответствует эталонному значению {disc_number}")
         sleep(1)
 
     def check_not_discrepancies(self):
         sleep(1)
         disc_not = self.driver.find_element(*ReportPageLocators.DISC_NOT)
         assert disc_not.text == 'Расхождений нет', 'Не должно быть расхождений, ошибка'
+        print(f"Расхождений нет") 
         sleep(1)
 
     def run_all_calc_in_subsection_1_rsv(self, text_value):
@@ -111,7 +113,7 @@ class ReportPage(BasePage):
         print('поиск Раздела 1 и клик по нему')
         self.finds_element_and_click(*RVSLocators.SECTION_1)
         print('ждем появления надписи "Отчет создан"')
-        self.is_element_present_experement(*ReportPageLocators.REPORT_CREATED)
+        self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
         sleep(2)
         print('Выбор типа плательщика"')
         self.finds_element_and_click(*RVSLocators.TYPE_PAYER)
@@ -122,7 +124,7 @@ class ReportPage(BasePage):
         assert check_text.text == '1 - Выплаты физ. лицам осуществлялись', 'Текст не соответсвует эталонному "1 - Выплаты физ. лицам осуществлялись"'
 
     def adding_employees_section_3(self, fio, sym_140):
-        print('Проверяем что раздел 3 загружен')
+        print('\nПроверяем что раздел 3 загружен')
         self.is_element_present(*RVSLocators.SECTION_3)
         print('Кликаем на раздел 3')
         self.finds_element_and_click(*RVSLocators.SECTION_3)
@@ -133,15 +135,31 @@ class ReportPage(BasePage):
         self.finds_element_and_send_keys_text(*RVSLocators.FIND_EMPLOYEE, fio)
         self.finds_element_and_click(*RVSLocators.CHOICE_FIND_EMPLOYEE)
         self.is_element_present(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+        sleep(1)
         self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
-        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
-        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
-        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
-        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_FEB)
-        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
-        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_MAR)
-        self.finds_element_and_send_keys_text(*RVSLocators.STRING_140, sym_140)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_NOV)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
+        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_DEC)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
         self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)
+        self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
+        sleep(1)
+
+    def checking_text_for_discrepancies(self, disc_text_standard):
+        self.finds_element_and_click(*ReportPageLocators.DISC_SECTION)
+        sleep(2)
+        disc = self.driver.find_element(*ReportPageLocators.DISC_NAME_CONTENT)
+        assert disc.text == disc_text_standard, f'Фактический текст расхождения {disc.text} \nотличается от эталонного текста = {disc_text_standard}'
+        print('\nЭталонный текст совпадает с текущим')
+        
+        
+        
