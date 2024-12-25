@@ -6,7 +6,6 @@ from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 
 name_org = "Новая сверка тест"
-period_4_22 = "2022"
 period_1_24 = "I кв'24"
 period_2_24 = "II кв'24"
 period_3_24 = "III кв'24"
@@ -20,11 +19,8 @@ disc_number_test_1_1 = "3"
 disc_number_test_2_1 = '6'
 disc_number_test_2_2 = '4'
 disc_number_test_3_1 = '23'
-text_value_2_1 = '75 000.00'
-text_value_2_2 = '150 000.00'
-text_value_3_1 = '10 530.05'
-years_text = '2022'
 report_rsv = 'Расчет по страховым взносам'
+report_persved = 'Персонифицированные сведения'
 fio = "Иванов Константин Олегович"
 sym_140 = '1000.00'
 disc_text_standard = "01 - НР, ВЖНР, ВПНР - Расхождения между разделом 3 и приложением 1"
@@ -40,10 +36,11 @@ def test_case_sym1(driver):
     report_fns.open()
     report_fns.check_filter_org(name_org)
     report_fns.check_basket_close()
-    report_fns.created_report(years_text, report_rsv)
+    report_fns.created_report_2022('2022', report_rsv)
     report_fns.type_payer_choice()
     report_fns.check_not_discrepancies()
-    report_fns.adding_employees_section_3(fio, sym_140)
+    report_fns.adding_employees_section_3(fio)
+    report_fns.adding_summ_month(sym_140)
     report_fns.check_discrepancies(disc_number_test_1_1)
     report_fns.checking_text_for_discrepancies(disc_text_standard)
     report_fns.close_report()
@@ -67,11 +64,11 @@ def test_case_sym2(driver):
     file_result.close()
     report_fns.select_report_by_period(period_1_24)
     report_fns.check_discrepancies(disc_number_test_2_1)  # проверяем количество расхождений
-    report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_1)
+    report_fns.run_all_calc_in_subsection_1_rsv()
     report_fns.close_report()
     report_fns.select_report_by_period(period_2_24)
     report_fns.check_discrepancies(disc_number_test_2_2)
-    report_fns.run_all_calc_in_subsection_1_rsv(text_value_2_2)
+    report_fns.run_all_calc_in_subsection_1_rsv()
     report_fns.check_not_discrepancies()
     report_fns.close_report()
     report_fns.delete_all_report()
@@ -94,8 +91,49 @@ def test_case_sym3(driver):
     file_result.close()
     report_fns.select_report_by_period(period_3_24)
     report_fns.check_discrepancies(disc_number_test_3_1)
-    report_fns.run_all_calc_in_employee_card(text_value_3_1)
+    report_fns.run_all_calc_in_employee_card('10 530.05')
     report_fns.check_not_discrepancies()
     report_fns.close_report()
     report_fns.delete_all_report()
     sleep(1)
+
+
+def test_case_sym4(driver):
+    page = LoginPage(driver, link_fix)
+    page.open()
+    page.should_be_login_button()
+    page.authorization()
+    report_fns = ReportPage(driver, link_report_fns)
+    report_fns.should_be_report_button()
+    report_fns.open()
+    # report_fns.check_filter_org(name_org)
+    # report_fns.check_basket_close()
+    # report_fns.created_report_2024('2024', report_rsv)
+    # report_fns.type_payer_choice()
+    # report_fns.check_not_discrepancies()
+    # report_fns.number_of_insured_persons('1')
+    # report_fns.adding_employees_section_3(fio)
+    # report_fns.adding_summ_month_2('100000.00')
+    # report_fns.close_report()
+    report_fns.select_report_by_period("Дек'24")  # удалить после завершения теста
+    # report_fns.created_report_2024('2024', report_persved)
+    # report_fns.save_report()
+    report_fns.adding_employees_ps(fio)
+    report_fns.checking_text_for_discrepancies_ps('Расхождение сумм выплат по сотруднику между отчетами РСВ и ПерсСвед')
+    # report_fns.close_report()
+    # report_fns.delete_all_report()
+    sleep(2)
+
+
+# def test_report_del(driver):
+#     page = LoginPage(driver, link_fix)
+#     page.open()
+#     page.should_be_login_button()
+#     page.authorization()
+#     report_fns = ReportPage(driver, link_report_fns)
+#     report_fns.should_be_report_button()
+#     report_fns.open()
+#     # report_fns.check_filter_org(name_org)
+#     # report_fns.check_basket_close()
+#     report_fns.delete_all_report()
+#     sleep(1)

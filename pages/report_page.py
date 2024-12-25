@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from file.locators import ReportPageLocators, RVSLocators
+from file.locators import ReportPageLocators, RVSLocators, PerSvedLocators
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 
@@ -10,6 +10,11 @@ class ReportPage(BasePage):
         assert self.is_element_present(*ReportPageLocators.REPORT_BUTTON), 'Не нашли кнопку перехода в раздел "Отчетность"'
 
     def delete_all_report(self):
+        # locators_del = [*ReportPageLocators.PMO_BUTTON, *ReportPageLocators.CHECK_PMO_BUTTON, *ReportPageLocators.REMOTE_REPORT_BUTTON, *ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE,
+        #                 *ReportPageLocators.BASKET_BUTTON, *ReportPageLocators.CHECK_PMO_BUTTON, *ReportPageLocators.REMOTE_REPORT_BUTTON, *ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE,
+        #                 *ReportPageLocators.PMO_BUTTON_CLOSE, *ReportPageLocators.BASKET_BUTTON_CLOSE]
+        # for i, j in locators_del:
+        #     self.finds_element_and_click(i, j)
         self.finds_element_and_click(*ReportPageLocators.PMO_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.CHECK_PMO_BUTTON)
         self.finds_element_and_click(*ReportPageLocators.REMOTE_REPORT_BUTTON)
@@ -41,7 +46,7 @@ class ReportPage(BasePage):
         self.finds_elements_contain_text(*ReportPageLocators.PERIOD_CHOICE, period)
         self.is_element_present(*ReportPageLocators.SAVE_REPORT)
 
-    def created_report(self, years_text, report):
+    def created_report_2022(self, years_text, report):
         self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
@@ -66,15 +71,64 @@ class ReportPage(BasePage):
         elif current_years.text < years_text:
             self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
             sleep(1)
-            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
-            sleep(1)
+            if current_years.text != years_text:
+                self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
+                sleep(1)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                sleep(1)
+            else:
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
         self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
         sleep(1)
-        self.is_element_clickable(*RVSLocators.MAIN)
+
+    def created_report_2024(self, years_text, report):
+        self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
+        sleep(1)
+        self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
+        sleep(1)
+        self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT)
+        sleep(1)
+        current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
+        sleep(1)
+        if current_years.text == years_text:
+            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+            sleep(1)
+        elif current_years.text > years_text:
+            self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
+            sleep(1)
+            if current_years.text != years_text:
+                self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
+                sleep(1)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                sleep(1)
+            else:
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+        elif current_years.text < years_text:
+            self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
+            sleep(1)
+            if current_years.text != years_text:
+                self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
+                sleep(1)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                sleep(1)
+            else:
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+        self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
+        sleep(1)
+        self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
+        sleep(1)
+
+    def save_report(self):
+        sleep(2)
+        self.is_element_present(*ReportPageLocators.SAVE_REPORT)
+        self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)
+        self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
+        sleep(2)
 
     def close_report(self):
+        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CLOSE_REPORT)
         sleep(2)
 
@@ -91,11 +145,11 @@ class ReportPage(BasePage):
         print(f"Расхождений нет") 
         sleep(1)
 
-    def run_all_calc_in_subsection_1_rsv(self, text_value):
+    def run_all_calc_in_subsection_1_rsv(self):
         self.finds_element_and_click(*RVSLocators.SUBSECTION_1)
         self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_SUBSECTION_1)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CALC)
-        self.is_element_present_value(*RVSLocators.STRING_51, text_value)
+        self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
         sleep(2)
 
     def run_all_calc_in_employee_card(self, text_value):
@@ -107,6 +161,7 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
 
     def type_payer_choice(self):
+        self.is_element_clickable(*RVSLocators.MAIN)
         sleep(1)
         print('проверка что Раздел 1 присутствует')
         self.is_element_present(*RVSLocators.SECTION_1)
@@ -123,7 +178,7 @@ class ReportPage(BasePage):
         check_text = self.driver.find_element(*RVSLocators.CHECK_TEXT_TYPE_PAYER_1)
         assert check_text.text == '1 - Выплаты физ. лицам осуществлялись', 'Текст не соответсвует эталонному "1 - Выплаты физ. лицам осуществлялись"'
 
-    def adding_employees_section_3(self, fio, sym_140):
+    def adding_employees_section_3(self, fio):
         print('\nПроверяем что раздел 3 загружен')
         self.is_element_present(*RVSLocators.SECTION_3)
         print('Кликаем на раздел 3')
@@ -136,30 +191,62 @@ class ReportPage(BasePage):
         self.finds_element_and_click(*RVSLocators.CHOICE_FIND_EMPLOYEE)
         self.is_element_present(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
         sleep(1)
+
+    def adding_summ_month(self, sym_140):
         self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
-        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140, sym_140)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_NOV)
-        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140, sym_140)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_DEC)
-        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140_EXP1, sym_140)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140, sym_140)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
         self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)
+        sleep(2)
         self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
         sleep(1)
+
+    def adding_summ_month_2(self, sym):  # один месяц декабрь, суммы одинаковые
+        self.finds_element_and_click(*RVSLocators.ADD_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD)
+        self.finds_element_and_click(*RVSLocators.CHOICE_MONTH_EMPLOYEE_CARD_DEC)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_140, sym)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_150, sym)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
+        self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+        self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)
+        self.is_disappeared(*RVSLocators.MESSAGE_IN_HEADER_DISC_REPORT)
+        sleep(2)
 
     def checking_text_for_discrepancies(self, disc_text_standard):
         self.finds_element_and_click(*ReportPageLocators.DISC_SECTION)
         sleep(2)
         disc = self.driver.find_element(*ReportPageLocators.DISC_NAME_CONTENT)
-        assert disc.text == disc_text_standard, f'Фактический текст расхождения {disc.text} \nотличается от эталонного текста = {disc_text_standard}'
+        assert disc.text == disc_text_standard, f'\nФактический текст расхождения \\{disc.text}\\ \nотличается от эталонного текста \\{disc_text_standard}\\'
         print('\nЭталонный текст совпадает с текущим')
-        
-        
-        
+
+    def checking_text_for_discrepancies_ps(self, disc_text_standard):
+        sleep(1)
+        disc = self.driver.find_element(*ReportPageLocators.DISC_NAME_CONTENT)
+        assert disc.text == disc_text_standard, f'\nФактический текст расхождения \\{disc.text}\\ \nотличается от эталонного текста \\{disc_text_standard}\\'
+        print('\nЭталонный текст совпадает с текущим')
+
+    def number_of_insured_persons(self, number):
+        self.finds_element_and_click(*RVSLocators.SUBSECTION_1)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_10_ALL_MONTH, number)
+        self.finds_element_click_send_keys_text(*RVSLocators.STRING_10_MONTH_3, number)
+
+    def adding_employees_ps(self, fio):
+        self.finds_element_and_click(*PerSvedLocators.ADD_EMPLOYEES)
+        self.is_element_present(*PerSvedLocators.BUTTON_ADD_EMPLOYEES_IN_CARD_PERS)
+        self.finds_element_and_send_keys_text(*RVSLocators.FIND_EMPLOYEE, fio)
+        self.finds_element_and_click(*RVSLocators.CHOICE_FIND_EMPLOYEE)
+        self.is_element_present(*PerSvedLocators.CONFIRM_CHANGE_EMPLOYEE_CARD_PS)
+        self.finds_element_and_click(*PerSvedLocators.CONFIRM_CHANGE_EMPLOYEE_CARD_PS)
+        sleep(1)

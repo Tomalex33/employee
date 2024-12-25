@@ -191,6 +191,8 @@ class Start:
         # print(att_value)
 
 
+task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')
+
 
 
 

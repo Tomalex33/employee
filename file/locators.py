@@ -34,6 +34,7 @@ class ReportPageLocators:
     ALL_LIST_REPORT = (By.CSS_SELECTOR, '.eoregistry-appCreateButton__moreButton')  # весь список отчетов
     PERIOD_REPORT = (By.CSS_SELECTOR, '[data-qa="DateLinkView__template"]')  # выбираем период отчета при создание и всего списка отчетов
     PERIOD_REPORT_4_2022 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2022-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
+    PERIOD_REPORT_4_2024 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2024-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2024
     LEFT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowUp"]')  # листаем год влево, на уменьшение
     RIGHT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowDown"]')  # листаем год вправо, на увеличение
     CURRENT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__year"]')  # текущий год в выпадающем списке дат
@@ -53,7 +54,8 @@ class ReportPageLocators:
 
 class RVSLocators:
 
-    MAIN = (By.CSS_SELECTOR, '[title="Главная"]')  # Главная"
+    MAIN = (By.CSS_SELECTOR, '[title="Главная"]')  # Главная
+    MESSAGE_IN_HEADER_DISC_REPORT = (By.CSS_SELECTOR, '[data-qa="eo-notification_message"]')  # Сообщение в шапке отчета о количестве расхождений
     SECTION_1 = (By.CSS_SELECTOR, '.tw-overflow-ellipsis[title="Раздел 1"]')  # Раздел 1
     TYPE_PAYER = (By.CSS_SELECTOR, '[data-qa="ЕССС.РасчетСВ.ОбязПлатСВ.ТипПлат"]')  # Выбор типа плательщика Раздела 1
     TYPE_PAYER_1 = (By.CSS_SELECTOR, '[title="1 - Выплаты физ. лицам осуществлялись"]')  # Выплаты физ. лицам осуществлялись
@@ -62,6 +64,10 @@ class RVSLocators:
     SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="structure-item"][title="Подраздел 1"][data-state="created"]')  # Раздел 1 подраздел 1"
     RUN_ALL_CALC_RSV_IN_SUBSECTION_1 = (By.CSS_SELECTOR, '[data-qa="runFedAllCalc"]')  # Запуск всех расчетов
     CONFIRM_CALC = (By.CSS_SELECTOR, '[data-qa="controls-ConfirmationDialog__button-true"]')  # Подтверждения запуска всех расчетов
+    STRING_10_ALL_MONTH = (By.CSS_SELECTOR, '[data-qa="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.КолСтрахЛицВс.КолВсегоПер"] [data-qa="controls-Render__field"] input')  # Количество застрахованных лиц, всего
+    STRING_10_MONTH_1 = (By.CSS_SELECTOR, '[data-qa="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.КолСтрахЛицВс.Кол1Посл3М"] [data-qa="controls-Render__field"] input')  # Количество застрахованных лиц, 1 месяц
+    STRING_10_MONTH_2 = (By.CSS_SELECTOR, '[data-qa="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.КолСтрахЛицВс.Кол2Посл3М"] [data-qa="controls-Render__field"] input')  # Количество застрахованных лиц, 2 месяц
+    STRING_10_MONTH_3 = (By.CSS_SELECTOR, '[data-qa="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.КолСтрахЛицВс.Кол3Посл3М"] [data-qa="controls-Render__field"] input')  # Количество застрахованных лиц, 3 месяц
     STRING_51 = (By.CSS_SELECTOR, '[data-name="ЕССС.РасчетСВ.ОбязПлатСВ.РасчСВ_ОПС_ОМС.РасчСВ_ОПС.БазНеПревышОПС.СумВсегоПер"] div div div[data-qa="controls-Render__field"] input')  # строка 51 , всего
     SYM_DISC_TEST3 = (By.XPATH, '//*[contains(text(), "10 530")]')  # поиск элемента по тексту, находим сумму расхождений для test_case_sym3
     RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD = (By.CSS_SELECTOR, '[data-qa="runAllCalculations"]')  # Запуск всех расчетов из карточки сотрудника
@@ -78,6 +84,14 @@ class RVSLocators:
     CHOICE_MONTH_EMPLOYEE_CARD_NOV = (By.CSS_SELECTOR, '[title="Ноябрь"]')  # Выбор февраля в карточке сотрудника
     CHOICE_MONTH_EMPLOYEE_CARD_DEC = (By.CSS_SELECTOR, '[title="Декабрь"]')  # Выбор марта в карточке сотрудника
     STRING_140 = (By.CSS_SELECTOR, '[data-name="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.СумВыпл"] div div input')  # строка 140
-    STRING_140_EXP = (By.CSS_SELECTOR, '[title="0"] .controls-fontsize-m.controls_text-style_default.controls-text-default.controls-fontweight-default')  # все нули в месяцах карточки сотрудника
-    STRING_140_EXP1 = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.СумВыпл"] [type="text"].controls-Field.js-controls-Field.controls-Field-focused-item.controls-InputBase__nativeField.controls-InputBase__nativeField_caretFilled.controls-InputBase__nativeField_caretFilled_theme_default.controls-InputBase__nativeField_hideCustomPlaceholder')  # строка 140
+    STRING_150 = (By.CSS_SELECTOR, '[data-name="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.ВыплОПС"] div div input')  # строка 150
     STRING_210_1_MONTH = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.ВыплСВДоп.ВыплСВДопМТ.НачислСВ"] div div[data-qa="controls-Render__field"] .controls-Field')  # Сумма в строке первого месяца
+
+
+class PerSvedLocators:
+
+    ADD_EMPLOYEES = (By.CSS_SELECTOR, '.tw-grow .controls-BaseButton__text')  # Добавления сотрудников в когда список сотрудников пуст.
+    BUTTON_ADD_EMPLOYEES_IN_CARD_PERS = (By.CSS_SELECTOR, '[data-qa="staff-Buttons__add"]')  # Кнопка добавления сотрудников в карточке сотрудника
+    CONFIRM_CHANGE_EMPLOYEE_CARD_PS = (By.CSS_SELECTOR, '[data-qa="FED2UI__ButtonSuccess"]')  # Подтверждения изменений после добавления сотрудника в ПерсСвед
+
+    # task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')

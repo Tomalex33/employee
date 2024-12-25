@@ -31,18 +31,18 @@ class BasePage:
             return False
         return True
 
+    def is_element_present_text_1(self, how, what, text, timeout=30):  # Проверка, что элемент найден имеет значение text
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element((how, what), text))
+        except NoSuchElementException:
+            return False
+        return True
+
     def is_element_present_value(self, how, what, text_value, timeout=30):  # Проверка, что элемент найден, ждет пока значение value будет text_value
         try:
             WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element_value((how, what), text_value))
         except NoSuchElementException:
             return False
-        return True
-
-    def is_element_present_simple(self, how, what, timeout=1):  # Простая проверка без условий
-        try:
-            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
-        except TimeoutException:
-            return True
         return True
 
     def is_not_element_present(self, how, what, timeout=5):  # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
@@ -52,10 +52,9 @@ class BasePage:
             return True
         return False
 
-    def is_disappeared(self, how, what, timeout=4):  # будет ждать до тех пор, пока элемент не исчезнет.
+    def is_disappeared(self, how, what, timeout=10):  # будет ждать до тех пор, пока элемент не исчезнет.
         try:
-            WebDriverWait(self.driver, timeout, 1, TimeoutException). \
-                until_not(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.driver, timeout).until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
         return True
@@ -94,7 +93,7 @@ class BasePage:
         element.click()
         sleep(1)
 
-    def finds_elements_and_click(self, how, what):                      # находим первый элемент и кликаем по нему
+    def finds_elements_and_click(self, how, what):               # находим первый элемент и кликаем по нему
         element = self.driver.find_elements(how, what)
         element[0].click()
         sleep(1)
