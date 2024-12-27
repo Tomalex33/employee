@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from file.locators import ReportPageLocators, RVSLocators, PerSvedLocators
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
+from selenium.webdriver import ActionChains
 
 
 class ReportPage(BasePage):
@@ -145,6 +146,14 @@ class ReportPage(BasePage):
         print(f"Расхождений нет") 
         sleep(1)
 
+    def check_not_discrepancies_ps(self):
+        sleep(1)
+        self.is_element_present_text_1(*PerSvedLocators.DISC_NOT_PS, "Расхождений нет")
+        disc_not = self.driver.find_element(*PerSvedLocators.DISC_NOT_PS)
+        assert disc_not.text == 'Расхождений нет', 'Не должно быть расхождений, ошибка'
+        print(f"Расхождений нет")
+        sleep(1)
+
     def run_all_calc_in_subsection_1_rsv(self):
         self.finds_element_and_click(*RVSLocators.SUBSECTION_1)
         self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_SUBSECTION_1)
@@ -220,9 +229,10 @@ class ReportPage(BasePage):
         self.finds_element_click_send_keys_text(*RVSLocators.STRING_150, sym)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_STRING_MONTH)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
+        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.SAVE_REPORT)
+        sleep(1)
         self.is_disappeared(*RVSLocators.MESSAGE_IN_HEADER_DISC_REPORT)
-        sleep(2)
 
     def checking_text_for_discrepancies(self, disc_text_standard):
         self.finds_element_and_click(*ReportPageLocators.DISC_SECTION)
@@ -231,11 +241,27 @@ class ReportPage(BasePage):
         assert disc.text == disc_text_standard, f'\nФактический текст расхождения \\{disc.text}\\ \nотличается от эталонного текста \\{disc_text_standard}\\'
         print('\nЭталонный текст совпадает с текущим')
 
-    def checking_text_for_discrepancies_ps(self, disc_text_standard):
+    def checking_text_for_discrepancies_ps(self, disc_text_standard, disc_text_standard1):
         sleep(1)
         disc = self.driver.find_element(*ReportPageLocators.DISC_NAME_CONTENT)
         assert disc.text == disc_text_standard, f'\nФактический текст расхождения \\{disc.text}\\ \nотличается от эталонного текста \\{disc_text_standard}\\'
         print('\nЭталонный текст совпадает с текущим')
+        disc1 = self.driver.find_element(*PerSvedLocators.SYM_DISC_TEST4)
+        assert disc1.text == disc_text_standard1, f'\nФактический текст расхождения \\{disc1.text}\\ \nотличается от эталонного текста \\{disc_text_standard1}\\'
+        print('\nЭталонный текст совпадает с текущим')
+
+    def click_on_hover_ps(self, sym_ps):
+        element_hover = self.driver.find_element(*PerSvedLocators.MOVE_TO_DISPLAY_HOVER)
+        hover = ActionChains(self.driver).move_to_element(element_hover)
+        hover.perform()
+        sleep(1)
+        self.finds_element_and_click(*PerSvedLocators.DISC_V_PERSVED_HOVER)
+        self.finds_element_click_send_keys_text(*PerSvedLocators.SYMM_CARD_PS, sym_ps)
+        self.finds_element_and_click(*PerSvedLocators.CONFIRM_CHANGE_EMPLOYEE_CARD_PS)
+
+    def close_data_menu(self):
+        self.finds_element_and_click(*PerSvedLocators.CLOSE_FILL_ACC_DATA)
+        sleep(1)
 
     def number_of_insured_persons(self, number):
         self.finds_element_and_click(*RVSLocators.SUBSECTION_1)

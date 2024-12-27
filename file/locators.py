@@ -93,5 +93,11 @@ class PerSvedLocators:
     ADD_EMPLOYEES = (By.CSS_SELECTOR, '.tw-grow .controls-BaseButton__text')  # Добавления сотрудников в когда список сотрудников пуст.
     BUTTON_ADD_EMPLOYEES_IN_CARD_PERS = (By.CSS_SELECTOR, '[data-qa="staff-Buttons__add"]')  # Кнопка добавления сотрудников в карточке сотрудника
     CONFIRM_CHANGE_EMPLOYEE_CARD_PS = (By.CSS_SELECTOR, '[data-qa="FED2UI__ButtonSuccess"]')  # Подтверждения изменений после добавления сотрудника в ПерсСвед
+    SYM_DISC_TEST4 = (By.CSS_SELECTOR, '.controls-DecoratorMoney .controls-text-danger')  # сумма расходления в тестах сумм 4
+    MOVE_TO_DISPLAY_HOVER = (By.CSS_SELECTOR, '.controls_Person_theme-default.ws-flex-shrink-0')  # наводим на элемент для появления ховера
+    DISC_V_PERSVED_HOVER = (By.XPATH, '//*[contains(text(), "В ПерсСвед")]')  # нажимаем по ховеру в расхождениях на ПерсСвед
+    SYMM_CARD_PS = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СуммаВыпл"] .controls-Field')  # Поле для ввода суммы в карточке сотрудника ПерсСвед
+    DISC_NOT_PS = (By.CSS_SELECTOR, '[data-name="np-employee__collationTitle"]')  # Нет расхождений в ПерсСвед
+    CLOSE_FILL_ACC_DATA = (By.CSS_SELECTOR, '.controls-CloseButton__close__icon_linkButton')  # закрываем всплывающее окно "Заполнить по данным"
 
     # task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')

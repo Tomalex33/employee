@@ -56,7 +56,7 @@ class Start:
 # action_chains.perform() # выполнение действий описанных ранее
 
 # заморозка состояние у элемента,
-# переходим на вкладку sources, делаем какое то действие на элементt (у элемента, который хотим заморозить) далее нажать F8, переходим во вкладку Elements
+# переходим на вкладку sources, делаем какое то действие на элементе (у элемента, который хотим заморозить) далее нажать F8, переходим во вкладку Elements
 
 # news[5].location_once_scrolled_inro_view # проскрол к элементу
 
@@ -189,10 +189,28 @@ class Start:
         # print(att_value)
         # self.driver.execute_script("arguments[0].setAttribute('value', '11.00')", element_sym)
         # print(att_value)
+    ########################################################################
+    class TestRsvReviseNew(TestCaseUI):
+        """Тестирование отчета РСВ для НИ Сверка сотрудников"""
 
+        org = Config().get("ORG")
 
-task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')
+        @classmethod
+        def setUpClass(cls):
+            cls.rsv_old = RSV503(cls.driver)
+            cls.rsv = RSV(cls.driver)
+            cls.desktop = Desktop3(cls.driver)
+            cls.client, cls.id_org = cls.desktop.initial_setting(Config().get("USER_NAME"), Config().get("PASSWORD"),
+                                                                 RegistersName.fns, cls.org)
 
+        def setUp(self):
+            """ПРЕДУСЛОВИЕ:
+                1. В организации должен быть хотя бы 1 сотрудник, в карточке указаны ФИО, пол, СНИЛС, ИНН, Паспортные данные
+                2. В реестре пфр и фнс нет отчетов перед каждым тестом"""
+            for i in ('ОтчетФНС', 'ОтчетПФР'):
+                ReportsMethods.delete_reports(self.client, self.org, i)
+                ReportsMethods.post_del_deleted_report_org(self.client, self.id_org, i)
 
-
-
+    def tearDown(self):
+        self.browser.close_windows_and_alert()
+##########################################################################################################
