@@ -57,7 +57,7 @@ class ReportPage(BasePage):
         current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
         sleep(1)
         if current_years.text == years_text:
-            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
             sleep(1)
         elif current_years.text > years_text:
             self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
@@ -65,20 +65,20 @@ class ReportPage(BasePage):
             if current_years.text != years_text:
                 self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
                 sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
                 sleep(1)
             else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
         elif current_years.text < years_text:
             self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
             sleep(1)
             if current_years.text != years_text:
                 self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
                 sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
                 sleep(1)
             else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
         self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
@@ -94,7 +94,7 @@ class ReportPage(BasePage):
         current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
         sleep(1)
         if current_years.text == years_text:
-            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
             sleep(1)
         elif current_years.text > years_text:
             self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
@@ -102,20 +102,20 @@ class ReportPage(BasePage):
             if current_years.text != years_text:
                 self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
                 sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
                 sleep(1)
             else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
         elif current_years.text < years_text:
             self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
             sleep(1)
             if current_years.text != years_text:
                 self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
                 sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
                 sleep(1)
             else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024)
+                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
         self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)

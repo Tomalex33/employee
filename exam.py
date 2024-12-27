@@ -1,20 +1,20 @@
-import os
-import pytest
-from selenium import webdriver
-from selenium.webdriver import Keys, ActionChains
-
-
-sbis_site = 'https://sbis.ru/'
-
-
-class Start:
-    def __init__(self):
-        self.driver = webdriver
-
-    def browser(self):
-        self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(25)
-        self.driver.get(sbis_site)
+# import os
+# import pytest
+# from selenium import webdriver
+# from selenium.webdriver import Keys, ActionChains
+#
+#
+# sbis_site = 'https://sbis.ru/'
+#
+#
+# class Start:
+#     def __init__(self):
+#         self.driver = webdriver
+#
+#     def browser(self):
+#         self.driver = webdriver.Chrome()
+#         self.driver.implicitly_wait(25)
+#         self.driver.get(sbis_site)
 
 
 # @pytest.fixture()#выполняется для каждой функции
@@ -127,43 +127,43 @@ class Start:
 # [data - qa = "cell"].controls - DecoratorMoney.controls - text - danger
 ######################
 
-
-        with report.step('Создать отчет'):
-            self.desktop.move_to_section_href(RegistersName.fns, self.org)
-            self.desktop.check_load_registry()
-            self.desktop.create_report_with_main_from_all_list(self.report_name, '2022', 'IV кв')
-            self.rsv.check_open_panel_report()
-            delay(2, 'Стабильность')
-            self.rsv.save_and_check_report_with_main_page()
-
-        def create_report_with_main_from_all_list(self, report_name, year, period, check_close=True,
-                                                  exact=True, **report_data):
-            """Метод для создания отчета с главной страницей через панель всех отчетов
-            :param report_name: название отчета
-            :param year: год
-            :param period: период
-            :param check_close: проверить закрытие панели
-            :param exact
-            :param report_data Данные для миникарточки
-            """
-
-            log(f"Создать отчет '{report_name}'")
-            self.enable_eo_logger()
-            all_reports = self.open_create_panel()
-            all_reports.create_main_report(report_name, year, period, False, exact=exact)
-            if not check_close:  # Если отчет не на главной, то смотрим миникарточку
-                Dialog(self.driver).fill_data_new_report(**report_data)
-
-            def open_create_panel(self):
-                """Открыть панель создания отчетов"""
-
-                from pages_inside.libraries.EORegistry.createPanel import Panel
-                from pages_inside.translate import translate
-
-                self.create_dwbtn.select(translate("Весь список"))
-                all_reports = Panel(self.driver)
-                all_reports.check_open()
-                return all_reports
+        #
+        # with report.step('Создать отчет'):
+        #     self.desktop.move_to_section_href(RegistersName.fns, self.org)
+        #     self.desktop.check_load_registry()
+        #     self.desktop.create_report_with_main_from_all_list(self.report_name, '2022', 'IV кв')
+        #     self.rsv.check_open_panel_report()
+        #     delay(2, 'Стабильность')
+        #     self.rsv.save_and_check_report_with_main_page()
+        #
+        # def create_report_with_main_from_all_list(self, report_name, year, period, check_close=True,
+        #                                           exact=True, **report_data):
+        #     """Метод для создания отчета с главной страницей через панель всех отчетов
+        #     :param report_name: название отчета
+        #     :param year: год
+        #     :param period: период
+        #     :param check_close: проверить закрытие панели
+        #     :param exact
+        #     :param report_data Данные для миникарточки
+        #     """
+        #
+        #     log(f"Создать отчет '{report_name}'")
+        #     self.enable_eo_logger()
+        #     all_reports = self.open_create_panel()
+        #     all_reports.create_main_report(report_name, year, period, False, exact=exact)
+        #     if not check_close:  # Если отчет не на главной, то смотрим миникарточку
+        #         Dialog(self.driver).fill_data_new_report(**report_data)
+        #
+        #     def open_create_panel(self):
+        #         """Открыть панель создания отчетов"""
+        #
+        #         from pages_inside.libraries.EORegistry.createPanel import Panel
+        #         from pages_inside.translate import translate
+        #
+        #         self.create_dwbtn.select(translate("Весь список"))
+        #         all_reports = Panel(self.driver)
+        #         all_reports.check_open()
+        #         return all_reports
 
         ##############################
 
@@ -190,27 +190,46 @@ class Start:
         # self.driver.execute_script("arguments[0].setAttribute('value', '11.00')", element_sym)
         # print(att_value)
     ########################################################################
-    class TestRsvReviseNew(TestCaseUI):
-        """Тестирование отчета РСВ для НИ Сверка сотрудников"""
-
-        org = Config().get("ORG")
-
-        @classmethod
-        def setUpClass(cls):
-            cls.rsv_old = RSV503(cls.driver)
-            cls.rsv = RSV(cls.driver)
-            cls.desktop = Desktop3(cls.driver)
-            cls.client, cls.id_org = cls.desktop.initial_setting(Config().get("USER_NAME"), Config().get("PASSWORD"),
-                                                                 RegistersName.fns, cls.org)
-
-        def setUp(self):
-            """ПРЕДУСЛОВИЕ:
-                1. В организации должен быть хотя бы 1 сотрудник, в карточке указаны ФИО, пол, СНИЛС, ИНН, Паспортные данные
-                2. В реестре пфр и фнс нет отчетов перед каждым тестом"""
-            for i in ('ОтчетФНС', 'ОтчетПФР'):
-                ReportsMethods.delete_reports(self.client, self.org, i)
-                ReportsMethods.post_del_deleted_report_org(self.client, self.id_org, i)
-
-    def tearDown(self):
-        self.browser.close_windows_and_alert()
+    # class TestRsvReviseNew(TestCaseUI):
+    #     """Тестирование отчета РСВ для НИ Сверка сотрудников"""
+    #
+    #     org = Config().get("ORG")
+    #
+    #     @classmethod
+    #     def setUpClass(cls):
+    #         cls.rsv_old = RSV503(cls.driver)
+    #         cls.rsv = RSV(cls.driver)
+    #         cls.desktop = Desktop3(cls.driver)
+    #         cls.client, cls.id_org = cls.desktop.initial_setting(Config().get("USER_NAME"), Config().get("PASSWORD"),
+    #                                                              RegistersName.fns, cls.org)
+    #
+    #     def setUp(self):
+    #         """ПРЕДУСЛОВИЕ:
+    #             1. В организации должен быть хотя бы 1 сотрудник, в карточке указаны ФИО, пол, СНИЛС, ИНН, Паспортные данные
+    #             2. В реестре пфр и фнс нет отчетов перед каждым тестом"""
+    #         for i in ('ОтчетФНС', 'ОтчетПФР'):
+    #             ReportsMethods.delete_reports(self.client, self.org, i)
+    #             ReportsMethods.post_del_deleted_report_org(self.client, self.id_org, i)
+    #
+    # def tearDown(self):
+    #     self.browser.close_windows_and_alert()
 ##########################################################################################################
+
+
+# def year_month(year, month):
+#     locator = f'.controls-PeriodLiteDialog-item__month [data-date="{year}-0{month}-01"]'
+#     print(locator)
+#     return locator
+# year_month('2024', '1')
+
+#########################################################
+nygnui_god = 2022
+tekywi_god = 2025
+
+while nygnui_god != tekywi_god:
+    if nygnui_god > tekywi_god:
+        tekywi_god = tekywi_god + 1
+        print(tekywi_god, 'текущий год')
+    elif nygnui_god < tekywi_god:
+        tekywi_god = tekywi_god - 1
+        print(tekywi_god, 'текущий год')
