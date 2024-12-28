@@ -27,14 +27,14 @@ class ReportPageLocators:
     ORG_ALL = (By.CSS_SELECTOR, '.controls-FilterView__text')  # поле "все юр. лица"
     ORG_FIND = (By.CSS_SELECTOR, '[data-qa="controls-Render__field"] input[type="text"].controls-Field')  # поле для ввода названия организации
     ORG_CHOICE = (By.CSS_SELECTOR, '[data-qa="cell"].controls-padding_right-list_')  # выбираем найденную организацию"
+    ORG_ALL_FILTER = (By.CSS_SELECTOR, '[title="Все юрлица"]')  # выбрать все юр. лица в фильтре
 
     PERIOD_CHOICE = (By.CSS_SELECTOR, '.eoregistry-MainRegister__period')  # выбираем период у отчетов, в реестре
 
     CREATED_REPORT = (By.CSS_SELECTOR, '[data-qa="sabyPage-addButton"]')  # создать отчет
     ALL_LIST_REPORT = (By.CSS_SELECTOR, '.eoregistry-appCreateButton__moreButton')  # весь список отчетов
     PERIOD_REPORT = (By.CSS_SELECTOR, '[data-qa="DateLinkView__template"]')  # выбираем период отчета при создание и всего списка отчетов
-    PERIOD_REPORT_4_2022_12 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2022-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2022
-    PERIOD_REPORT_4_2024_12 = (By.CSS_SELECTOR, '.controls-PeriodLiteDialog-item__month [data-date="2024-12-01"]')  # выбираем период отчета при создание и всего списка отчетов 4 кв 2024
+    PERIOD_REPORT_ALL = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog-item__month-caption"]')  # находит все года и месяца отчетов, при создание отчета из всего списка
     LEFT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowUp"]')  # листаем год влево, на уменьшение
     RIGHT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__arrowDown"]')  # листаем год вправо, на увеличение
     CURRENT_YEARS = (By.CSS_SELECTOR, '[data-qa="controls-PeriodLiteDialog__year"]')  # текущий год в выпадающем списке дат

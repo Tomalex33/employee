@@ -45,7 +45,7 @@ class BasePage:
             return False
         return True
 
-    def is_not_element_present(self, how, what, timeout=5):  # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
+    def is_not_element_present(self, how, what, timeout=1):  # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
         try:
             WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
@@ -96,6 +96,11 @@ class BasePage:
     def finds_elements_and_click(self, how, what):               # находим первый элемент и кликаем по нему
         element = self.driver.find_elements(how, what)
         element[0].click()
+        sleep(1)
+
+    def finds_elements(self, how, what):               # находим первый элемент и кликаем по нему
+        element = self.driver.find_elements(how, what)
+
         sleep(1)
 
     def finds_element_and_click_send_keys(self, how, what, text, keys):

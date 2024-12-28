@@ -5,27 +5,17 @@ from time import sleep
 from selenium.webdriver import ActionChains
 
 
-class ReportPage(BasePage):
+class ReportPage(BasePage, ReportPageLocators):
 
     def should_be_report_button(self):
         assert self.is_element_present(*ReportPageLocators.REPORT_BUTTON), 'Не нашли кнопку перехода в раздел "Отчетность"'
 
     def delete_all_report(self):
-        # locators_del = [*ReportPageLocators.PMO_BUTTON, *ReportPageLocators.CHECK_PMO_BUTTON, *ReportPageLocators.REMOTE_REPORT_BUTTON, *ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE,
-        #                 *ReportPageLocators.BASKET_BUTTON, *ReportPageLocators.CHECK_PMO_BUTTON, *ReportPageLocators.REMOTE_REPORT_BUTTON, *ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE,
-        #                 *ReportPageLocators.PMO_BUTTON_CLOSE, *ReportPageLocators.BASKET_BUTTON_CLOSE]
-        # for i, j in locators_del:
-        #     self.finds_element_and_click(i, j)
-        self.finds_element_and_click(*ReportPageLocators.PMO_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.CHECK_PMO_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.REMOTE_REPORT_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE)
-        self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.CHECK_PMO_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.REMOTE_REPORT_BUTTON)
-        self.finds_element_and_click(*ReportPageLocators.CONFIRM_DIALOG_BUTTON_TRUE)
-        self.finds_element_and_click(*ReportPageLocators.PMO_BUTTON_CLOSE)
-        self.finds_element_and_click(*ReportPageLocators.BASKET_BUTTON_CLOSE)
+        locators_del = [self.PMO_BUTTON, self.CHECK_PMO_BUTTON, self.REMOTE_REPORT_BUTTON, self.CONFIRM_DIALOG_BUTTON_TRUE,
+                        self.BASKET_BUTTON, self.CHECK_PMO_BUTTON, self.REMOTE_REPORT_BUTTON, self.CONFIRM_DIALOG_BUTTON_TRUE,
+                        self.PMO_BUTTON_CLOSE, self.BASKET_BUTTON_CLOSE]
+        for i in locators_del:
+            self.finds_element_and_click(*i)
 
     def check_basket_close(self):
         try:
@@ -36,90 +26,55 @@ class ReportPage(BasePage):
         return True
 
     def check_filter_org(self, name_org):
-        self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
-        self.finds_element_and_click(*ReportPageLocators.RESET_ORG_IN_FILTER)
-        self.finds_element_and_click(*ReportPageLocators.FILTER_ORG_APPLY)
-        self.finds_element_and_click(*ReportPageLocators.ORG_ALL)
-        self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
-        self.finds_element_and_click(*ReportPageLocators.ORG_CHOICE)
+        name_org_filter = self.driver.find_element(*ReportPageLocators.ORG_ALL)
+        if name_org_filter.text == 'Все юрлица':
+            self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
+            self.finds_element_and_click(*ReportPageLocators.ORG_ALL_FILTER)
+            self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
+            self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
+            self.finds_element_and_click(*ReportPageLocators.FILTER_ORG_APPLY)
+        elif name_org_filter.text != name_org:
+            self.finds_element_and_click(*ReportPageLocators.ICON_FILTER_ORG)
+            self.finds_element_and_click(*ReportPageLocators.RESET_ORG_IN_FILTER)
+            self.finds_element_and_click(*ReportPageLocators.FILTER_ORG_APPLY)
+            self.finds_element_and_click(*ReportPageLocators.ORG_ALL)
+            self.finds_elements_and_send_keys(*ReportPageLocators.ORG_FIND, name_org)
+            self.finds_element_and_click(*ReportPageLocators.ORG_CHOICE)
 
     def select_report_by_period(self, period):
         self.finds_elements_contain_text(*ReportPageLocators.PERIOD_CHOICE, period)
         self.is_element_present(*ReportPageLocators.SAVE_REPORT)
 
-    def created_report_2022(self, years_text, report):
+    def created_report(self, years_text, month):
         self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
-        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
-        sleep(1)
         self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT)
-        sleep(1)
         current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
         sleep(1)
         if current_years.text == years_text:
-            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
-            sleep(1)
-        elif current_years.text > years_text:
-            self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
-            sleep(1)
-            if current_years.text != years_text:
-                self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
-                sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
-                sleep(1)
-            else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
-        elif current_years.text < years_text:
-            self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
-            sleep(1)
-            if current_years.text != years_text:
-                self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
-                sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
-                sleep(1)
-            else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2022_12)
-        self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
-        sleep(1)
-        self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
+            all_date = self.driver.find_elements(*ReportPageLocators.PERIOD_REPORT_ALL)
+            for i in all_date:
+                att_name = i.get_attribute("data-date")
+                if att_name == f'{years_text}-{month}-01':
+                    return i.click()
+        else:
+            while current_years.text != years_text:
+                if current_years.text > years_text:
+                    self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
+                elif current_years.text < years_text:
+                    self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
+            all_date = self.driver.find_elements(*ReportPageLocators.PERIOD_REPORT_ALL)
+            for i in all_date:
+                att_name = i.get_attribute("data-date")
+                if att_name == f'{years_text}-{month}-01':
+                    return i.click()
         sleep(1)
 
-    def created_report_2024(self, years_text, report):
-        self.finds_element_and_click(*ReportPageLocators.CREATED_REPORT)
-        sleep(1)
-        self.finds_element_and_click(*ReportPageLocators.ALL_LIST_REPORT)
-        sleep(1)
-        self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT)
-        sleep(1)
-        current_years = self.driver.find_element(*ReportPageLocators.CURRENT_YEARS)
-        sleep(1)
-        if current_years.text == years_text:
-            self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
-            sleep(1)
-        elif current_years.text > years_text:
-            self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
-            sleep(1)
-            if current_years.text != years_text:
-                self.finds_element_and_click(*ReportPageLocators.LEFT_YEARS)
-                sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
-                sleep(1)
-            else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
-        elif current_years.text < years_text:
-            self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
-            sleep(1)
-            if current_years.text != years_text:
-                self.finds_element_and_click(*ReportPageLocators.RIGHT_YEARS)
-                sleep(1)
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
-                sleep(1)
-            else:
-                self.finds_element_and_click(*ReportPageLocators.PERIOD_REPORT_4_2024_12)
+    def choice_report(self, report):
         self.finds_elements_and_send_keys(*ReportPageLocators.REPORT_FIND, report)
         sleep(1)
         self.finds_element_and_click(*ReportPageLocators.CHOICE_FIND_REPORT)
-        sleep(1)
+        sleep(2)
 
     def save_report(self):
         sleep(2)
