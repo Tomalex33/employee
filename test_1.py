@@ -3,6 +3,7 @@ import pytest
 import os
 from pages.login_page import LoginPage
 from pages.base_page import BasePage
+from pages.Start import Start
 from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 
@@ -27,13 +28,13 @@ sym_140 = '1000.00'
 disc_text_standard = "01 - НР, ВЖНР, ВПНР - Расхождения между разделом 3 и приложением 1"
 
 
-@pytest.mark.usefixtures("driver")
-class TestSym(BasePage):
+# @pytest.mark.usefixtures("driver")
+class TestSym(BasePage, Start):
 
     def test_case_sym1(self, driver):
-        # page = LoginPage(self, driver, link_fix)
-        # page.open()
-        # page.should_be_login_button()
+        page = LoginPage(self, driver, link_fix)
+        page.open()
+        page.should_be_login_button()
         # page.authorization()
         # report_fns = ReportPage(self, driver, link_report_fns)
         # report_fns.should_be_report_button()

@@ -2,6 +2,7 @@ from time import sleep
 import pytest
 import os
 from pages.login_page import LoginPage
+from pages.Start import Start
 from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 from pages.base_page import BasePage
@@ -28,7 +29,7 @@ sym_140 = '1000.00'
 disc_text_standard = "01 - НР, ВЖНР, ВПНР - Расхождения между разделом 3 и приложением 1"
 
 
-class TestSym(BasePage):
+class TestSym(BasePage, Start):
 
     @classmethod
     def setup_class(cls):

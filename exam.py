@@ -223,13 +223,29 @@
 # year_month('2024', '1')
 
 #########################################################
-nygnui_god = 2022
-tekywi_god = 2025
+# nygnui_god = 2022
+# tekywi_god = 2025
+#
+# while nygnui_god != tekywi_god:
+#     if nygnui_god > tekywi_god:
+#         tekywi_god = tekywi_god + 1
+#         print(tekywi_god, 'текущий год')
+#     elif nygnui_god < tekywi_god:
+#         tekywi_god = tekywi_god - 1
+#         print(tekywi_god, 'текущий год')
 
-while nygnui_god != tekywi_god:
-    if nygnui_god > tekywi_god:
-        tekywi_god = tekywi_god + 1
-        print(tekywi_god, 'текущий год')
-    elif nygnui_god < tekywi_god:
-        tekywi_god = tekywi_god - 1
-        print(tekywi_god, 'текущий год')
+#########################################################
+# Определяем класс
+class MyClass:
+    def my_method(self):
+        print("Hello, World!")
+
+# Импортируем класс и метод
+from my_module import MyClass
+from my_module import my_method
+
+# Создаем экземпляр класса
+my_object = MyClass()
+
+# Вызываем метод
+my_object.my_method()
