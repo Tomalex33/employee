@@ -2,12 +2,7 @@ from pages.base_page import BasePage
 from file.locators import LoginPageLocators
 from selenium.webdriver import Keys
 from time import sleep
-
-login_add = 'пчелкин'
-pass_add = 'пчелкин123'
-
-login_add_future = 'Январев'
-pass_add_future = 'Январев123'
+from config import login_add, pass_add
 
 
 class LoginPage(BasePage):

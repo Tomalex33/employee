@@ -2,14 +2,14 @@ import pytest
 from selenium import webdriver
 
 
-@pytest.fixture(scope='class', autouse=True)
-def driver():
-    print("\nstart browser for test..")
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    yield driver
-    print("\nquit browser..")
-    driver.quit()
+# @pytest.fixture(scope='class', autouse=True)
+# def driver():
+#     print("\nstart browser for test..")
+#     driver = webdriver.Chrome()
+#     driver.maximize_window()
+#     yield driver
+#     print("\nquit browser..")
+#     driver.quit()
 
 
 # @pytest.fixture(scope='function', autouse=True)
@@ -30,3 +30,12 @@ def driver():
 # @pytest.fixture(scope='class')
 # def print_name3():
 #     print("\nФИКСТУРА ВЫПОЛНЯЕТСЯ ПОСЛЕ КЛАССА")
+
+# @pytest.fixture()
+# def driver():
+#     print("\nstart browser for test..")
+#     driver = webdriver.Chrome()
+#     driver.maximize_window()
+#     yield driver
+#     print("\nquit browser..")
+#     driver.quit()

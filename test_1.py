@@ -3,7 +3,7 @@ import pytest
 import os
 from pages.login_page import LoginPage
 from pages.base_page import BasePage
-from pages.Start import Start
+from pages.start import Start
 from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
 

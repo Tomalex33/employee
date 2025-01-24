@@ -4,12 +4,12 @@ import os
 from pages.login_page import LoginPage
 from pages.report_page import ReportPage
 from file.action import DownloadReports, FileResultWindow
+from config import link_fix
 
 name_org = "Новая сверка тест"
 period_1_24 = "I кв'24"
 period_2_24 = "II кв'24"
 period_3_24 = "III кв'24"
-link_fix = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
 link_report_fns = 'https://fix-online.sbis.ru/page/fns'
 link_test = 'https://test-sso.sbis.ru/auth-online/?ret=test-online.sbis.ru'
 link_report_test_fns = 'https://test-online.sbis.ru/page/fns'

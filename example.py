@@ -5,13 +5,18 @@ from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 import pytest
 from pages.login_page import LoginPage
+from pages.start import RunBrowser
 
-
-# @pytest.mark.usefixtures("print_name")
-class Test:
+# @pytest.mark.usefixtures("driver")
+class Test(RunBrowser):
 
     @classmethod
     def setup_class(cls):
+        driver = RunBrowser()
+        driver.run_chrome()
+        driver.open()
+        sleep(1)
+        driver.close()
         print("Выполнится 1 раз перед всеми тестами в классе")
         print("Запуск браузера")
         print("Открываем страничку ФНС")
@@ -40,10 +45,18 @@ class Test:
 
 # class TestFixture:
 #
-#     def test1(self, print_name, print_name1):
+#     def __init__(self, driver):
+#         self.driver = driver
+#     def test1(self):
 #         print("\nВыполнение теста 1")
 #
-#     def test2(self, print_name, print_name1):
+#     def test2(self):
 #         print("\nВыполнение теста 2")
 
 
+# @pytest.mark.usefixtures("driver")
+# def test1():
+#     print('\nпервый тест')
+#
+# def test2():
+#     print('\nвторой тест')
