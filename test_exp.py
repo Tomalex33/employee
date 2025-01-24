@@ -29,11 +29,11 @@ sym_140 = '1000.00'
 disc_text_standard = "01 - НР, ВЖНР, ВПНР - Расхождения между разделом 3 и приложением 1"
 
 
-class TestSym(BasePage, Start):
+class TestSym(LoginPage):
 
     @classmethod
     def setup_class(cls):
-        page = LoginPage(cls.driver, cls.link_fix)
+        page = LoginPage(cls.driver, link_fix)
         page.open()
         page.should_be_login_button()
         page.authorization()
@@ -41,7 +41,6 @@ class TestSym(BasePage, Start):
 
     def setup_method(self):
         print("\nВыполняется перед каждым тестом")
-        pass
 
     def teardown_method(self):
         print("\nВыполняется после каждого теста, независимо от успешности setup_method")

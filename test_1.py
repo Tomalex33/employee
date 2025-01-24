@@ -28,11 +28,17 @@ sym_140 = '1000.00'
 disc_text_standard = "01 - НР, ВЖНР, ВПНР - Расхождения между разделом 3 и приложением 1"
 
 
-# @pytest.mark.usefixtures("driver")
-class TestSym(BasePage, Start):
+# @pytest.fixture(autouse=True)
+# def init_page(request, driver):
+#     request.cls.page = LoginPage(driver, link_fix)
+
+
+@pytest.mark.usefixtures("driver")
+class TestSym(LoginPage):
 
     def test_case_sym1(self, driver):
-        page = LoginPage(self, driver, link_fix)
+        print('тест')
+        page = LoginPage(driver, link_fix)
         page.open()
         page.should_be_login_button()
         # page.authorization()
