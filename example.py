@@ -7,16 +7,19 @@ import pytest
 from pages.login_page import LoginPage
 from pages.start import RunBrowser
 
-# @pytest.mark.usefixtures("driver")
-class Test(RunBrowser):
+link = 'https://fix-sso.sbis.ru/auth-online/?ret=fix-online.sbis.ru'
+
+
+class Test:
+
+    driver = None
 
     @classmethod
     def setup_class(cls):
-        driver = RunBrowser()
-        driver.run_chrome()
-        driver.open()
+        cls.driver = RunBrowser()
+        cls.driver.open(link)
         sleep(1)
-        driver.close()
+
         print("Выполнится 1 раз перед всеми тестами в классе")
         print("Запуск браузера")
         print("Открываем страничку ФНС")
@@ -41,22 +44,4 @@ class Test(RunBrowser):
     def teardown_class(cls):
         print("\nВыполняется 1 раз после всех тестов в классе")
         print("Закрываем браузер")
-
-
-# class TestFixture:
-#
-#     def __init__(self, driver):
-#         self.driver = driver
-#     def test1(self):
-#         print("\nВыполнение теста 1")
-#
-#     def test2(self):
-#         print("\nВыполнение теста 2")
-
-
-# @pytest.mark.usefixtures("driver")
-# def test1():
-#     print('\nпервый тест')
-#
-# def test2():
-#     print('\nвторой тест')
+        cls.driver.close()
