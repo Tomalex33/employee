@@ -85,7 +85,7 @@ class RVSLocators:
     CHOICE_MONTH_EMPLOYEE_CARD_DEC = (By.CSS_SELECTOR, '[title="Декабрь"]')  # Выбор марта в карточке сотрудника
     STRING_140 = (By.CSS_SELECTOR, '[data-name="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.СумВыпл"] div div input')  # строка 140
     STRING_150 = (By.CSS_SELECTOR, '[data-name="Сотрудники.Сотрудник.СвВыплСВОПС.СвВыпл.СвВыплМК.ВыплОПС"] div div input')  # строка 150
-    STRING_210_1_MONTH = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СвВыплСВОПС.ВыплСВДоп.ВыплСВДопМТ.НачислСВ"] div div[data-qa="controls-Render__field"] .controls-Field')  # Сумма в строке первого месяца
+    STRING_210_1_MONTH = (By.CSS_SELECTOR, '[data-qa="editing_component-view_render"] [title="10530.05"] [title="10530.05"] .controls-fontsize-m')  # Сумма в строке 210, находит три записи по всем месяцам
 
 
 class PerSvedLocators:
@@ -99,5 +99,3 @@ class PerSvedLocators:
     SYMM_CARD_PS = (By.CSS_SELECTOR, '[data-qa="Сотрудники.Сотрудник.СуммаВыпл"] .controls-Field')  # Поле для ввода суммы в карточке сотрудника ПерсСвед
     DISC_NOT_PS = (By.CSS_SELECTOR, '[data-name="np-employee__collationTitle"]')  # Нет расхождений в ПерсСвед
     CLOSE_FILL_ACC_DATA = (By.CSS_SELECTOR, '.controls-CloseButton__close__icon_linkButton')  # закрываем всплывающее окно "Заполнить по данным"
-
-    # task_in = Element(By.CSS_SELECTOR, '[data-qa="row"]:has([title="Входящие"])', 'Входящие задачи')

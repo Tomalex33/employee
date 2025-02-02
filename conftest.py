@@ -2,6 +2,12 @@ import pytest
 from selenium import webdriver
 
 
+@pytest.fixture(scope='class', autouse=True)
+def browser_setup(request):
+    print("\nБраузер запустился")
+    request.cls.driver = webdriver.Chrome()
+
+
 # @pytest.fixture(scope='class', autouse=True)
 # def driver():
 #     print("\nstart browser for test..")

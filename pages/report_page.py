@@ -116,12 +116,13 @@ class ReportPage(BasePage, ReportPageLocators):
         self.is_element_present_text(*ReportPageLocators.REPORT_CREATED)
         sleep(2)
 
-    def run_all_calc_in_employee_card(self, text_value):
+    def run_all_calc_in_employee_card(self):
         self.finds_element_and_click(*ReportPageLocators.DISC)
         self.finds_element_and_click(*RVSLocators.SYM_DISC_TEST3)
         self.finds_element_and_click(*RVSLocators.RUN_ALL_CALC_RSV_IN_EMPLOYEE_CARD)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CALC)
-        self.is_element_present_value(*RVSLocators.STRING_210_1_MONTH, text_value)
+        sleep(10)
+        self.is_element_present_value1(*RVSLocators.STRING_210_1_MONTH)
         self.finds_element_and_click(*RVSLocators.CONFIRM_CHANGE_EMPLOYEE_CARD)
 
     def type_payer_choice(self):

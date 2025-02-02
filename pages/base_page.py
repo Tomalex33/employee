@@ -8,14 +8,14 @@ from selenium.webdriver.support.ui import Select
 
 class BasePage:
 
-    def __init__(self, driver, url, timeout=5):
+    def __init__(self, driver, timeout=5):
         self.driver = driver
-        self.url = url
+        # self.url = url
         self.driver.implicitly_wait(timeout)   # Неявное ожидание timeout - задаем значение в секундах
 
-    def open(self):
-        self.driver.get(self.url)
-        sleep(2)
+    # def open(self):
+    #     self.driver.get(self.url)
+    #     sleep(2)
 
     def is_element_present(self, how, what, timeout=30):  # Проверка, что элемент найден, если не найден обрабатываем исключение и тест падает по false
         try:
@@ -44,6 +44,9 @@ class BasePage:
         except NoSuchElementException:
             return False
         return True
+
+    def is_element_present_value1(self, how, what, timeout=30):
+        WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located((how, what)))
 
     def is_not_element_present(self, how, what, timeout=1):  # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
         try:

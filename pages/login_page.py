@@ -6,8 +6,8 @@ from config import login_add, pass_add
 
 
 class LoginPage(BasePage):
-    # def __init__(self, driver, url, timeout=5):
-    #     super().__init__(driver, url, timeout)
+    def __init__(self, driver, timeout=5):
+        super().__init__(driver, timeout)
 
     def authorization(self):
         self.finds_element_and_send_keys(*LoginPageLocators.LOGIN_FIELD, login_add, Keys.ENTER)
